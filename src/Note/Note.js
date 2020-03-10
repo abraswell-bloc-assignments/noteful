@@ -38,10 +38,8 @@ export default class Note extends React.Component {
   }
 
   render() {
-    if(!this.props.info || !this.props.info.modified) {
-      return null;
-    }
     const { name, id, modified } = this.props
+    const formatDate = format(new Date(modified), 'MMMM do yyyy');
     return (
       <div className='Note'>
         <h2 className='Note__title'>
@@ -49,8 +47,8 @@ export default class Note extends React.Component {
             {name}
           </Link>
         </h2>
-        <button
-          className='Note__delete'
+        <button 
+          className='Note__delete' 
           type='button'
           onClick={this.handleClickDelete}
         >
@@ -63,11 +61,11 @@ export default class Note extends React.Component {
             Modified
             {' '}
             <span className='Date'>
-              {format(modified, 'Do MMM YYYY')}
+            {formatDate}
             </span>
           </div>
         </div>
       </div>
-    )
+    )   
   }
 }
