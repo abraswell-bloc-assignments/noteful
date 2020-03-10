@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import format from 'date-fns/format'
+import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './Note.css'
 
 export default class Note extends React.Component {
-  static defaultProps = {
-    onDeleteNote: () => {}
+  static defaultProps ={
+    onDeleteNote: () => {},
   }
-  static contextType = ApiContext
+  static contextType = ApiContext;
 
   handleClickDelete = e => {
     e.preventDefault()
@@ -19,18 +19,17 @@ export default class Note extends React.Component {
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
-        'content-type' : 'application/json'
-      }
+        'content-type': 'application/json'
+      },
     })
-
-      .then (res => {
+      .then(res => {
         if (!res.ok)
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
       .then(() => {
-        this.context.onDeleteNote(noteId)
-        // allow parent to perform extra behavior
+        this.context.deleteNote(noteId)
+        // allow parent to perform extra behaviour
         this.props.onDeleteNote(noteId)
       })
       .catch(error => {
@@ -42,7 +41,6 @@ export default class Note extends React.Component {
     if(!this.props.info || !this.props.info.modified) {
       return null;
     }
-    console.log(format(new Date(), 'yyyy-LL-dd')); // 2019-08-23
     const { name, id, modified } = this.props
     return (
       <div className='Note'>
@@ -51,8 +49,8 @@ export default class Note extends React.Component {
             {name}
           </Link>
         </h2>
-        <button 
-          className='Note__delete' 
+        <button
+          className='Note__delete'
           type='button'
           onClick={this.handleClickDelete}
         >
@@ -65,7 +63,7 @@ export default class Note extends React.Component {
             Modified
             {' '}
             <span className='Date'>
-              {format(modified, 'yyyy-LL-dd')}
+              {format(modified, 'Do MMM YYYY')}
             </span>
           </div>
         </div>
