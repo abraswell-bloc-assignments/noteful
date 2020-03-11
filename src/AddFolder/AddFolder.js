@@ -43,12 +43,8 @@ class AddFolder extends Component {
             return res.json()
         })
 
-        // .then(responseData => {
-        //     this.context.addFolder(responseData)
-        // })
-
         .then(data => {
-            this.setState({name: {value: ''}})
+            this.context.addFolder(data);
             this.props.history.push('/')
         })
 
