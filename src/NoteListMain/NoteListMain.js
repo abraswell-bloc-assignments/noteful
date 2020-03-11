@@ -15,6 +15,7 @@ export default class NoteListMain extends React.Component {
   }
   static contextType = ApiContext
 
+  
   render() {
     const { folderId } = this.props.match.params
     const { notes=[] } = this.context
@@ -33,7 +34,7 @@ export default class NoteListMain extends React.Component {
           )}
         </ul>
         <div className='NoteListMain__button-container'>
-          <CircleButton
+          <CircleButton 
             tag={Link}
             to='/add-note'
             type='button'

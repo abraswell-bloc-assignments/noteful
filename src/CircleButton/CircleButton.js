@@ -1,19 +1,29 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './CircleButton.css'
 
-export default function NavCircleButton(props) {
-    const { tag, className, children, ...otherProps } = props
+
+ class NavCircleButton extends Component {
+
+    render(){
+    const { tag, className, children, ...otherProps } = this.props
 
     return React.createElement(
-        props.tag,
+        
+        this.props.tag,
         {
-            className: ['NavCircleButton', props.className].join(' '),
+            className: ['NavCircleButton', this.props.className].join(' '),
             ...otherProps
         },
-        props.children
+        this.props.children
+
+        
     )
+
+    }
 }
 
 NavCircleButton.defaultProps ={
     tag: 'a'
 }
+
+export default NavCircleButton
