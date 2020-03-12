@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import NotePageNav from '../NotePageNav/NotePageNav'
+// import NotePageNav from '../NotePageNav/NotePageNav'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
 import config from '../config'
+import './AddNote.css'
 
 class AddNote extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class AddNote extends Component {
             name: {
                 value: ''
             },
-            id: {
+            folder_id: {
                 value: ''
             },
             content: {
@@ -34,18 +35,37 @@ class AddNote extends Component {
         this.setState({content: {value: content}})
     }
 
-    handleSubmit(event) {
-        event.preventDefault()
-        const modified = new Date()
-        const newNote = {
+    updateFolder(folder) {
+        this.setState({folder_id: {value: folder}})
+    }
+
+
+
+
+    // handleSubmit(e) {
+    //     e.preventDefault()
+    //     const modified = new Date()
+    //     const newNote = {
+    //         name: this.state.name.value,
+    //         content: this.state.content.value,
+    //         modified: modified
+    //     }
+    //     const specificEndpoint = `${config.API_ENDPOINT}/notes`
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+
+        const specificEndpoint = `${config.API_ENDPOINT}/notes`
+       
+          const newNote = {
             name: this.state.name.value,
             content: this.state.content.value,
-            modified: modified
-        }
-        const specificEndpoint = `${config.API_ENDPOINT}/notes`
+            folder_id: this.state.folder_id.value,
+            modified: new Date(),
+          }
+
+          console.log(newNote)
         
-       
-        this.setState({ error: null })
         fetch(specificEndpoint, {
             headers: {
                 'Content-Type': 'application/json'
@@ -76,18 +96,19 @@ class AddNote extends Component {
     }
 
     render(){
+        const { folders = [] } = this.context
         return(
-            <div className='parent-div'>
-            <NotePageNav />
-            <form className='form'>
-                <h2>Add a Note</h2>
+            <div className='AddNote'>     
+            <h3>Add a Note</h3>
+            <form className='AddNote__Form'>
                 <div className='form-group'>
                     <input 
                         type='text' 
                         className='new__note__name'
-                        name='name' 
-                        id='name' 
+                        name='noteName' 
+                        id='note-name-input' 
                         onChange={e => this.updateName(e.target.value)}
+                        required
                     />  
                 </div>
                 <div className='form-group'>
@@ -95,14 +116,33 @@ class AddNote extends Component {
                         type='text' 
                         className='new__note__content'
                         name='content' 
-                        id='content' 
+                        id='note-content-input'
                         onChange={e => this.updateContent(e.target.value)}
+                        required
                     />  
+                </div>
+                <div className='form-group'>
+                    <label htmlFor='note-folder-select'>
+                        Folder
+                    </label>
+                    <select 
+                        id='note-folder-select' 
+                        name='notefolderid'
+                        onChange={e => this.updateFolder(e.target.value)}
+                        required
+                    >
+                    <option value={null}>...</option>
+                    {folders.map(folder =>
+                        <option key={folder.id} value={folder.id}>
+                        {folder.fullname}
+                        </option>
+                    )}
+                    </select>
                 </div>
                 <div className='NoteListNav__button-wrapper'>
                     <CircleButton
                         className='NoteListNav__add-note-button'
-                        onClick={e=> this.handleSubmit(e)}
+                        onClick={this.handleSubmit}
                     >
                         <FontAwesomeIcon icon='plus' />
                         <br />
@@ -117,3 +157,4 @@ class AddNote extends Component {
 }
 
 export default AddNote
+

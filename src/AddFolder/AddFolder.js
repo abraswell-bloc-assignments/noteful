@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import NotePageNav from '../NotePageNav/NotePageNav'
+// import NotePageNav from '../NotePageNav/NotePageNav'
 import ValidationError from '../Validation/ValidationError'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
@@ -11,40 +11,40 @@ class AddFolder extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: {
-                value: '',
-                touched: false
-            }
+            name : '',
+            touched: false
         }
     }
 
     static contextType = ApiContext
 
-    // validateName(fieldValue){
-    //     const name = this.state.name.value.trim()
+    updateName = (name) => {
+        this.setState({
+            name : name,
+            touched: true
+        })
+      }
 
-    //     if (name.length === 0 ) {
-    //         return 'Name is required'
-    //     } else if (name.length < 3) {
-    //         return 'Name must be at least 3 characters long'
-    //     }
-    // }
+    validateName(){
+        const name = this.state.name.trim()
 
-    changeHandler = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-        // uses input's name
+        if (name.length === 0 ) {
+            return 'Name is required'
+        } else if (name.length < 3) {
+            return 'Name must be at least 3 characters long'
+        }
     }
 
-    submitHandler = (e) => {  
+    handleSubmit = (e) => {  
         e.preventDefault()
-        const specificEndpoint = `${config.API_ENDPOINT}/folders` 
+        const specificEndpoint = `${config.API_ENDPOINT}/folders`
         const folderName = this.state
-
-      fetch(specificEndpoint, {
+        
+        fetch(specificEndpoint, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            method: 'POST',
+            }, 
             body: JSON.stringify(folderName)
         })
 
@@ -65,36 +65,33 @@ class AddFolder extends Component {
         })
 
         .catch(error => {
-            this.setState({error})
+            console.error({ error })
         })
     }
 
-    render(){
-        
+    render(){       
         return(
-            <div>
-                <NotePageNav />
-                
-                <form className='AddFolder__form'>
+            <div className='AddFolder'>     
                     <h3>Add a Folder</h3>
+                    <form className='AddFolder__form'>
                     <div className='AddFolder_form-group'>
                         <input 
+                            onChange={e => this.updateName(e.target.value)}
                             type='text' 
-                            className='new__note__name'
-                            name='name' 
-                            id='name' 
-                            onChange={this.changeHandler}
-                            />
-                            {this.state.name.touched && (
-                                <ValidationError message={this.validateName()}/>
-                            )}
+                            className='new__folder__name'
+                            name='folder-name' 
+                            id='folder-name-input'
+                            required 
+                        />
+                        {this.state.name.touched && (
+                            <ValidationError message={this.validateName()}/>
+                        )}   
                     </div>
 
-                    {/* <button type='submit'>Submit</button> */}
                     <div className='NoteListNav__button-wrapper'>
                     <CircleButton
                         className='NoteListNav__add-folder-button'
-                        onClick={this.submitHandler}
+                        onClick={this.handleSubmit}
                     >
                         <FontAwesomeIcon icon='plus' />
                         <br />

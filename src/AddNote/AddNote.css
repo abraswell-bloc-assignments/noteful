@@ -1,15 +1,16 @@
-.AddFolder {
+.AddNote {
     margin: 130px 0 0;
     padding: 0;
     float: right;
     text-align: right;
+    width: 100%;
   }
 
-.AddFolder h3 {
+.AddNote h3 {
     padding: 0 15px;
 }
 
-.AddFolder_form-group input{
+.AddNote_form-group input{
     background-color: #030f1f;
     border: none;
     outline: none;
@@ -17,9 +18,18 @@
     display: block;
     font-family: var(--custom-font);
     font-size: 20px;
-    margin: 0 0 8px auto;
-    max-width: 180px;
-    padding: 8px 16px;
+    margin: 1vh 0 1vh auto;
+    /* max-width: 180px; */
+    padding: 1vh 0 1vh 16px;
+}
+#name, #content {
+    width: 80%; 
+}
+
+.new__note__content {
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+    height: 50vh;
 }
 
 input:-webkit-autofill::first-line {
