@@ -38,11 +38,17 @@ class App extends Component {
             });
     }
 
-    handleDeleteNote = noteId => {
+    deleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
         });
     };
+
+    addNote = note => {
+        this.setState({
+          folders: [ ...this.state.notes, note ],
+        })
+      }
 
     addFolder = folder => {
         this.setState({
@@ -88,8 +94,9 @@ class App extends Component {
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
-            addFolder: this.handleAddFolder,
-            deleteNote: this.handleDeleteNote
+            addNote: this.addNote,
+            addFolder: this.addFolder,
+            deleteNote: this.deleteNote
         };
         return (
             <ApiContext.Provider value={value}>

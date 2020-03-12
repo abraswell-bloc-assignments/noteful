@@ -1,18 +1,34 @@
 import React, {Component} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import NotePageNav from '../NotePageNav/NotePageNav'
+import ValidationError from '../Validation/ValidationError'
+import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
 import config from '../config'
+import './AddFolder.css'
 
 class AddFolder extends Component {
     constructor(props) {
         super(props)
         this.state = {
             name: {
-                value: ''
+                value: '',
+                touched: false
             }
         }
     }
 
     static contextType = ApiContext
+
+    // validateName(fieldValue){
+    //     const name = this.state.name.value.trim()
+
+    //     if (name.length === 0 ) {
+    //         return 'Name is required'
+    //     } else if (name.length < 3) {
+    //         return 'Name must be at least 3 characters long'
+    //     }
+    // }
 
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
@@ -57,18 +73,34 @@ class AddFolder extends Component {
         
         return(
             <div>
-                <form className='form' onSubmit={this.submitHandler}>
-                    <h2>Add a Note</h2>
-                    <div className='form-group'>
+                <NotePageNav />
+                
+                <form className='AddFolder__form'>
+                    <h3>Add a Folder</h3>
+                    <div className='AddFolder_form-group'>
                         <input 
                             type='text' 
                             className='new__note__name'
                             name='name' 
                             id='name' 
                             onChange={this.changeHandler}
-                        />  
+                            />
+                            {this.state.name.touched && (
+                                <ValidationError message={this.validateName()}/>
+                            )}
                     </div>
-                    <button type='submit'>Submit</button>
+
+                    {/* <button type='submit'>Submit</button> */}
+                    <div className='NoteListNav__button-wrapper'>
+                    <CircleButton
+                        className='NoteListNav__add-folder-button'
+                        onClick={this.submitHandler}
+                    >
+                        <FontAwesomeIcon icon='plus' />
+                        <br />
+                        Submit
+                    </CircleButton>
+                    </div>
                 </form>
 
             </div>
