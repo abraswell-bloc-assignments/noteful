@@ -1,13 +1,22 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import NotePageNav from '../NotePageNav/NotePageNav'
-import ValidationError from '../Validation/ValidationError'
+import NotePageNav from '../NotePageNav/NotePageNav'
+// import ValidationError from '../Validation/ValidationError'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './AddFolder.css'
 
 class AddFolder extends Component {
+    static defaultProps = {
+        history: {
+          goBack: () => { }
+        },
+        match: {
+          params: {}
+        }
+      }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -25,18 +34,19 @@ class AddFolder extends Component {
         })
       }
 
-    validateName(){
+    validateName= () => {
         const name = this.state.name.trim()
 
         if (name.length === 0 ) {
-            return 'Name is required'
+            return alert('Name is required')
         } else if (name.length < 3) {
-            return 'Name must be at least 3 characters long'
+            return alert('Name must be at least 3 characters long')
         }
     }
 
-    handleSubmit = (e) => {  
+    handleSubmit = (e) => {
         e.preventDefault()
+
         const specificEndpoint = `${config.API_ENDPOINT}/folders`
         const folderName = this.state
         
@@ -69,38 +79,41 @@ class AddFolder extends Component {
         })
     }
 
-    render(){       
+    render(props){       
         return(
-            <div className='AddFolder'>     
+            <section>
+                <NotePageNav onClick={() => this.props.handleButtonClick()}/>
+                <div className='AddFolder'>     
                     <h3>Add a Folder</h3>
                     <form className='AddFolder__form'>
-                    <div className='AddFolder_form-group'>
-                        <input 
-                            onChange={e => this.updateName(e.target.value)}
-                            type='text' 
-                            className='new__folder__name'
-                            name='folder-name' 
-                            id='folder-name-input'
-                            required 
-                        />
-                        {this.state.name.touched && (
-                            <ValidationError message={this.validateName()}/>
-                        )}   
-                    </div>
+                        <div className='AddFolder_form-group'>
+                            <input 
+                                onChange={e => this.updateName(e.target.value)}
+                                type='text' 
+                                className='new__folder__name'
+                                name='folder-name' 
+                                id='folder-name-input'
+                                required 
+                            />
+                            {this.state.name.touched && (
+                                alert('name is required')
+                                // <ValidationError message={this.validateName()}/>
+                            )}   
+                        </div>
 
-                    <div className='NoteListNav__button-wrapper'>
-                    <CircleButton
-                        className='NoteListNav__add-folder-button'
-                        onClick={this.handleSubmit}
-                    >
-                        <FontAwesomeIcon icon='plus' />
-                        <br />
-                        Submit
-                    </CircleButton>
-                    </div>
-                </form>
-
-            </div>
+                        <div className='NoteListNav__button-wrapper'>
+                        <CircleButton
+                            className='NoteListNav__add-folder-button'
+                            onClick={this.handleSubmit}
+                        >
+                            <FontAwesomeIcon icon='plus' />
+                            <br />
+                            Submit
+                        </CircleButton>
+                        </div>
+                    </form>
+                </div>
+            </section>
         )
     }
 }
