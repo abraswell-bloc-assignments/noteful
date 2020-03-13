@@ -1,12 +1,13 @@
 .AddFolder {
     margin: 130px 0 0;
     padding: 0;
-    float: right;
-    text-align: right;
+    float: left;
+    text-align: left;
   }
 
 .AddFolder h3 {
     padding: 0 15px;
+    color: #bdbdbd;
 }
 
 .AddFolder_form-group input{

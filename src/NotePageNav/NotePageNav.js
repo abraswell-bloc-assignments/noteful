@@ -8,7 +8,9 @@ import './NotePageNav.css'
 export default class NotePageNav extends React.Component {
   static defaultProps = {
     history: {
-      goBack: () => { }
+      goBack: () => { 
+        window.history.back()
+       }
     },
     match: {
       params: {}

@@ -1,13 +1,14 @@
-.AddNote {
-    margin: 130px 0 0;
+.AddNote__Form {
     padding: 0;
-    float: right;
-    text-align: right;
-    width: 100%;
+    float: left;
+    text-align: left;
+    width: 40%;
   }
 
 .AddNote h3 {
-    padding: 0 15px;
+    margin: 130px 0 0;
+    padding: 1vh 15px;
+    color: #bdbdbd;
 }
 
 .AddNote_form-group input{
@@ -22,14 +23,18 @@
     /* max-width: 180px; */
     padding: 1vh 0 1vh 16px;
 }
-#name, #content {
-    width: 80%; 
+
+.new__note__name {
+    padding: 0 15px;
+    width: 100%;
 }
 
 .new__note__content {
+    padding: 0 15px;
     margin-top: 1vh;
-    margin-bottom: 3vh;
-    height: 50vh;
+    margin-bottom: 1vh;
+    height: 35vh;
+    width: 100%;
 }
 
 input:-webkit-autofill::first-line {
@@ -49,3 +54,20 @@ input, input[type=text] {
     box-shadow: 0 0 0px 1000px  #030f1f inset;
     outline: none;
 }
+
+.AddNote__add-note-button{
+margin: 2vh auto;
+}
+
+select {
+    display: block;
+    height: 3em;
+    width: 100%;
+    font-size: 1em;
+    background-color: #030f1f;
+    color: #b5b3b3;
+    border: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    box-sizing: border-box;
+  }
