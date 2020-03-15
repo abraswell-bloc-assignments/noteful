@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,7 +15,7 @@ export default class NoteListNav extends React.Component {
     render() {
         const { folders = [], notes = [] } = this.context
         return(
-            <div className='NoteListNav'>
+            <aside className='NoteListNav'>
                 <ul className='NoteListNav__list'>
                     { /* Loop through the array of folders passed as a prop*/ }
                     { /* Create list item for each folder in the array */}
@@ -45,7 +46,7 @@ export default class NoteListNav extends React.Component {
                         Folder
                     </CircleButton>
                 </div>
-            </div>
+            </aside>
         )
     }
 }

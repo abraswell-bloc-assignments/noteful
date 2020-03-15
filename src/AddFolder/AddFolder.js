@@ -100,13 +100,15 @@ export default class AddFolder extends Component {
         >
         <div className='form AddFolder_form-group'>
           <div className='field form-group'>
-            <input
-              type='text'
-              className='new__folder__name' 
-              id='folder-name-input'
-              name='folder'
-              onChange={event => this.updateName(event.target.value)}
-            />
+            <label htmlFor="folder-name">
+              <input
+                type='text'
+                className='new__folder__name' 
+                name='folder'
+                aria-required="true"
+                onChange={event => this.updateName(event.target.value)}
+              />
+            </label>
           </div>
           <div className='buttons'>
             <button type='submit'>

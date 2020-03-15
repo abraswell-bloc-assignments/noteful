@@ -25,13 +25,17 @@ exports[`AddItemForm component renders the complete form 1`] = `
       <div
         className="field form-group"
       >
-        <input
-          className="new__folder__name"
-          id="folder-name-input"
-          name="folder"
-          onChange={[Function]}
-          type="text"
-        />
+        <label
+          htmlFor="folder-name"
+        >
+          <input
+            aria-required="true"
+            className="new__folder__name"
+            name="folder"
+            onChange={[Function]}
+            type="text"
+          />
+        </label>
       </div>
       <div
         className="buttons"

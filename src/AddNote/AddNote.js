@@ -131,44 +131,52 @@ export default class AddNote extends Component {
         )}
           
         <div className='field form-group'>
-          <input
-            type='text'
-            defaultValue='Enter Name'
-            className='new__note__name'
-            id='note-name-input'
-            name='note'
-            onChange={event => {
-              this.updateName(event.target.value);
-            }}
-          />
+          <label htmlFor="note-name">
+            <input
+              type='text'
+              defaultValue='Enter Name'
+              className='new__note__name'
+              id='note-name-input'
+              name='note'
+              aria-required="true"
+              onChange={event => {
+                this.updateName(event.target.value);
+              }}
+            />
+          </label>
         </div>
 
         <div className='field form-group'>
-          <textarea
-            className='new__note__content'
-            id='note-content-input'
-            name='content'
-            onChange={event => {
-              this.updateContent(event.target.value);
-            }}
-          />
+          <label htmlFor="note-content"> 
+            <textarea
+              className='new__note__content'
+              id='note-content-input'
+              name='content'
+              onChange={event => {
+                this.updateContent(event.target.value);
+              }}
+            />
+          </label>
         </div>
 
         <div className='field form-group'>
-          <select
-            id='note-folder-select'
-            name='note-folder-id'
-            onChange={event => {
-              this.idChange(event.target.value);
-            }}
-          >
-            <option value={null}>Select Folder</option>
-            {this.context.folders.map(folder => (
-              <option key={folder.name} name='folder' value={folder.id}>
-                {folder.name}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="select-folder">
+            <select
+              id='note-folder-select'
+              name='note-folder-id'
+              aria-required="true"
+              onChange={event => {
+                this.idChange(event.target.value);
+              }}
+            >
+              <option value={null}>Select Folder</option>
+              {this.context.folders.map(folder => (
+                <option key={folder.name} name='folder' value={folder.id}>
+                  {folder.name}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
 
         <div className='buttons'>

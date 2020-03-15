@@ -21,7 +21,6 @@
 .form-group input{
     background-color: #030f1f;
     border: none;
-    outline: none;
     color: #b5b3b3; 
     display: block;
     font-family: var(--custom-font);
@@ -31,6 +30,7 @@
     /* max-width: 180px; */
     padding: 8px 16px;
 }
+
 
 input:-webkit-autofill::first-line {
     font-size: 20px
@@ -54,7 +54,6 @@ input, input[type=text] {
     background-color: #cacaca;
     border-radius: 30px;
     border: 0;
-    outline: 0;
     color: black;
     display: block;
     font-size: 12px;
@@ -74,5 +73,9 @@ input, input[type=text] {
   .buttons button:hover {
     background-color: #29862e;
     cursor: pointer;
+  }
+
+  .buttons button:focus {
+    background-color: #29862e;
   }
   

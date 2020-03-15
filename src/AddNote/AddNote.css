@@ -14,7 +14,7 @@
 .AddNote_form-group input, textarea{
     background-color: #030f1f;
     border: none;
-    outline: none;
+    /* outline: none; */
     color: #b5b3b3; 
     display: block;
     margin: 1vh 0 5vh auto;
