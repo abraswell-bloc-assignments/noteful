@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { render } from '@testing-library/react';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faPlus, faChevronLeft, faTrashAlt, faCheckDouble
@@ -12,11 +11,11 @@ library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM. render(
+  ReactDOM.render(
     <BrowserRouter>
       <App />
-    </BrowserRouter>
+    </BrowserRouter>,
     div
   )
-  ReactDOM. unmountComponentAtNode(div)
+  ReactDOM.unmountComponentAtNode(div)
 })

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
+import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
@@ -48,4 +49,14 @@ export default class NoteListMain extends React.Component {
       </section>
     )
   }
+}
+
+NoteListMain.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+}
+
+NoteListMain.defaultProps = {
+  notes: [],
 }

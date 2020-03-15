@@ -3,6 +3,7 @@
     padding: 0;
     float: left;
     text-align: left;
+    width: 40%;
   }
 
 .AddFolder h3 {
@@ -10,7 +11,14 @@
     color: #bdbdbd;
 }
 
-.AddFolder_form-group input{
+.error__message {
+  padding: 0 15px;
+  font-weight: 600;
+  color: #f6142f;
+  display: block
+}
+
+.form-group input{
     background-color: #030f1f;
     border: none;
     outline: none;
@@ -18,8 +26,9 @@
     display: block;
     font-family: var(--custom-font);
     font-size: 20px;
-    margin: 0 0 8px auto;
-    max-width: 180px;
+    margin: 0 0 5vh;
+    width: 100%;
+    /* max-width: 180px; */
     padding: 8px 16px;
 }
 
@@ -40,3 +49,30 @@ input, input[type=text] {
     box-shadow: 0 0 0px 1000px  #030f1f inset;
     outline: none;
 }
+
+.buttons button {
+    background-color: #cacaca;
+    border-radius: 30px;
+    border: 0;
+    outline: 0;
+    color: black;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 60px;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    width: 60px;
+    margin: 1vh auto
+  }
+  
+  a.buttons button {
+    padding: 16px 8px 8px;
+  }
+  
+  .buttons button:hover {
+    background-color: #29862e;
+    cursor: pointer;
+  }
+  

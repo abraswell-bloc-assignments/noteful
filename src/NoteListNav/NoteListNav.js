@@ -2,10 +2,13 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
+import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import { countNotesForFolder } from '../notes-helpers'
 import './NoteListNav.css'
 
+
+// This component is rendered in the sidebar for the '/' and 'folder/:folderId' routes
 export default class NoteListNav extends React.Component {
     static contextType = ApiContext
     render() {
@@ -13,7 +16,10 @@ export default class NoteListNav extends React.Component {
         return(
             <div className='NoteListNav'>
                 <ul className='NoteListNav__list'>
+                    { /* Loop through the array of folders passed as a prop*/ }
+                    { /* Create list item for each folder in the array */}
                     {folders.map(folder =>
+                        
                         <li key={folder.id}>
                             <NavLink
                                 className='NoteListNav__folder-link'
@@ -42,5 +48,15 @@ export default class NoteListNav extends React.Component {
             </div>
         )
     }
+}
+
+NoteListNav.propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
+  }
+
+NoteListNav.defaultProps = {
+folders: []
 }
 

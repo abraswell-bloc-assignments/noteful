@@ -1,95 +1,128 @@
-import React, {Component} from 'react'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
-// import CircleButton from '../CircleButton/CircleButton'
-import ApiContext from '../ApiContext'
-import config from '../config'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'
 import './AddFolder.css'
+import ApiContext from '../ApiContext'
 
-class AddFolder extends Component {
+export default class AddFolder extends Component {
+  constructor() {
+    super()
+    this.state = {
+      error: null,
+      name: '',
+      nameValid: false,
+      validationMessage: ''
+    };
+  }
+  static contextType = ApiContext
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            name : '',
-            touched: false
-        }
-    }   
+  isNameValid = (e) => {
+    e.preventDefault()
+    if (!this.state.name) {
+      this.setState({
+        validationMessage: 'Please enter a folder name',
+        nameValid: false
+      })
+    } 
+    else if (this.state.name.length < 3) {
+      this.setState({
+        validationMessage: 'folder name must be at least 3 characters long',
+        nameValid: false
+      })
+    }
+    
+    else {
+      this.setState(
+        {
+          validationMessage: '',
+          nameValid: true
+        },
+        this.handleAddFolder()
+      )
+    }
+  }
 
-    updateName = (name) => {
-        this.setState({
-            name : name,
-            touched: true
-        })
-      }
-
-    static contextType = ApiContext
-
-    handleSubmit = (e) => {
-        e.preventDefault()
-
-        const specificEndpoint = `${config.API_ENDPOINT}/folders`
-
-        const folder = {
-            name: e.target['folder-name'].value
-        }
-  
-            fetch(specificEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }, 
-                body: JSON.stringify(folder)
-            })
-
-            .then(res => {
-                if(!res.ok) {
-                    return res.json().then(error => {
-                        throw error
-                    })
-                }
-                return res.json()
-            })
-
-            .then(folder => {
-                this.context.addFolder(folder)
-                this.props.history.push(`/folder/${folder.id}`)
-              })
-
-            .catch(error => {
-                console.error('add folder', { error })
-            })
-            
-
-        
+  handleAddFolder = () => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name
+      })
     }
 
-    render() {
-        return (
-            <div>  
-                <section className='AddFolder'>
-                    <h3>Create a folder</h3>
-                    <NotefulForm onSubmit={this.handleSubmit}>
-                        <div className='field AddFolder_form-group'>
-                            <input 
-                                type='text'
-                                className='new__folder__name' 
-                                id='folder-name-input' 
-                                name='folder-name' 
-                                required
-                            />
-                        </div>
+    fetch('http://localhost:9090/folders', options)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong')
+        }
+        return res
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.context.handleAddFolder(data)
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+      })
+  }
 
-                        <div className='buttons'>
-                            <button type='submit'>
-                            Add new folder
-                            </button>
-                        </div>
-                    </NotefulForm>
-                </section>
+  updateName = (name) => {
+    this.setState({ name: name })
+  }
+
+  render() {
+    return (
+      <section className='AddFolder'>
+        <h3>Create a folder</h3>
+
+        {!this.state.nameValid && (
+          <div>
+            <p className='error__message'>{this.state.validationMessage}</p>
           </div>
-        )
-      }
+        )}
+
+        <NotefulForm
+          onSubmit={event => {
+            this.isNameValid(event)
+          }}
+        >
+        <div className='form AddFolder_form-group'>
+          <div className='field form-group'>
+            <input
+              type='text'
+              className='new__folder__name' 
+              id='folder-name-input'
+              name='folder'
+              onChange={event => this.updateName(event.target.value)}
+            />
+          </div>
+          <div className='buttons'>
+            <button type='submit'>
+            <FontAwesomeIcon icon='plus' />
+              <br />
+              Folder
+            </button>
+          </div>
+        </div>
+        </NotefulForm>
+        {this.state.error && (
+          <div>
+            <p className='error__message'>{this.state.error}</p>
+          </div>
+        )}
+      </section>
+    )
+  }
 }
 
-export default AddFolder
+AddFolder.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+}

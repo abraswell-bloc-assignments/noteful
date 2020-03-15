@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
-import NoteListNav from './NoteListNav'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
+import NoteListMain from './NoteListMain'
 
-describe(`NoteListNav component`, () => {
+describe(`NoteListMain component`, () => {
   const props = {
     notes: [
       {
@@ -34,31 +34,31 @@ describe(`NoteListNav component`, () => {
         "folderId": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
         "content": "Eum culpa odit."
       },
-    ],
-    folders: [
-      {
-        "id": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
-        "name": "Important"
-      },
-      {
-        "id": "b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1",
-        "name": "Super"
-      },
-      {
-        "id": "b07162f0-ffaf-11e8-8eb2-f2801f1b9fd1",
-        "name": "Spangley"
-      }
     ]
   }
 
-  it('renders a .NoteListNav by default', () => {
-    const wrapper = shallow(<NoteListNav />)
-    expect(toJson(wrapper)).toMatchSnapshot()
+    //Smoke Test
+    it('renders without crashing', () => {
+      // start by creating an element to render the component into
+      const div = document.createElement('div')
+      ReactDOM.render(<NoteListMain />, div)
+      // Render the component -- Line 9 is the actual test
+      // If something is wrong it will fail here.
+      ReactDOM.unmountComponentAtNode(div)
+    });
+
+  it('renders a .NoteListMain by default', () => {
+    const tree = renderer
+    .create(<NoteListMain />)
+    .toJSON()
+    expect(tree).toMatchSnapshot()
   })
 
-  it('renders a link in ul for each folder in array', () => {
-    const ul = shallow(<NoteListNav {...props} />)
+  it('renders a Note in ul for each notes in array', () => {
+    const ul = renderer
+    .create(<NoteListMain {...props} />)
       .find('ul')
-    expect(toJson(ul)).toMatchSnapshot()
+    .toJSON()
+    expect(ul).toMatchSnapshot()
   })
 })

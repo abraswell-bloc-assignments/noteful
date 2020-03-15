@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddItemForm component renders the complete form 1`] = `
+<section
+  className="AddFolder"
+>
+  <h3>
+    Create a folder
+  </h3>
+  <div>
+    <p
+      className="error__message"
+    >
+      
+    </p>
+  </div>
+  <form
+    action="#"
+    className="Noteful-form "
+    onSubmit={[Function]}
+  >
+    <div
+      className="form AddFolder_form-group"
+    >
+      <div
+        className="field form-group"
+      >
+        <input
+          className="new__folder__name"
+          id="folder-name-input"
+          name="folder"
+          onChange={[Function]}
+          type="text"
+        />
+      </div>
+      <div
+        className="buttons"
+      >
+        <button
+          type="submit"
+        >
+          <br />
+          Folder
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+`;

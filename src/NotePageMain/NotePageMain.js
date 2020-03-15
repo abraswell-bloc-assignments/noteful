@@ -1,5 +1,6 @@
 import React from 'react'
 import Note from '../Note/Note'
+import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import { findNote } from '../notes-helpers'
 import './NotePageMain.css'
@@ -37,3 +38,16 @@ export default class NotePageMain extends React.Component {
     )
   }
 }
+
+NotePageMain.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+}
+
+NotePageMain.defaultProps = {
+  note: {
+    content: '',
+  }
+}
+

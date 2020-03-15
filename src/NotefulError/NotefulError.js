@@ -16,8 +16,11 @@ class NotefulError extends Component {
     render() {
         if(this.state.hasError) {
             return (
-                // <div className='error'>{this.props.message}</div>
-                <h2>Something went wrong!</h2>
+                <div>
+                    <h2>This is embarrassing...</h2>
+                    <h3>Something went wrong!</h3>
+                    <div className='error'>{this.props.message}</div>
+                </div>
             )
         }
         return this.props.children

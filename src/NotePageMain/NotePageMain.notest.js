@@ -1,6 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
+import renderer from 'react-test-renderer'
 import NotePageMain from './NotePageMain'
 
 describe(`NotePageMain component`, () => {
@@ -15,14 +14,18 @@ describe(`NotePageMain component`, () => {
   }
 
   it('renders a .NotePageMain by default', () => {
-    const wrapper = shallow(<NotePageMain />)
-    expect(toJson(wrapper)).toMatchSnapshot()
+    const tree = renderer
+      .create(<NotePageMain />)
+      .toJSON()
+      expect(tree).toMatchSnapshot()
   })
 
   it('renders a Note with note prop', () => {
-    const note = shallow(<NotePageMain {...props} />)
+    const note = renderer
+      .create(<NotePageMain {...props} />)
       .find('Note')
-    expect(toJson(note)).toMatchSnapshot()
+      .toJSON()
+    expect(note).toMatchSnapshot()
   })
 
   it(`splits the content by \\n or \\n\\r, with a p foreach`, () => {
@@ -31,9 +34,11 @@ describe(`NotePageMain component`, () => {
     }, {
       note: { "content": "Content with n.\nafter." }
     }].forEach(props => {
-      const content = shallow(<NotePageMain {...props} />)
+      const content = renderer
+        .create(<NotePageMain {...props} />)
         .find('NotePageMain__content')
-      expect(toJson(content)).toMatchSnapshot()
+        .toJSON()
+      expect(content).toMatchSnapshot()
     })
   })
 })
