@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
+import PropTypes from 'prop-types'
 import config from '../config'
 import './Note.css'
 
 export default class Note extends React.Component {
+
   static defaultProps ={
     onDeleteNote: () => {},
   }
-  static contextType = ApiContext;
+  static contextType = ApiContext
 
   handleClickDelete = e => {
     e.preventDefault()
@@ -47,8 +49,8 @@ export default class Note extends React.Component {
             {name}
           </Link>
         </h2>
-        <button 
-          className='Note__delete' 
+        <button
+          className='Note__delete'
           type='button'
           onClick={this.handleClickDelete}
         >
@@ -69,3 +71,10 @@ export default class Note extends React.Component {
     )   
   }
 }
+
+Note.propTypes = {
+  modified: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  handleDelete: PropTypes.func
+};

@@ -27,7 +27,13 @@ export default class AddFolder extends Component {
     } 
     else if (this.state.name.length < 3) {
       this.setState({
-        validationMessage: 'folder name must be at least 3 characters long',
+        validationMessage: 'Folder name must be at least 3 characters long',
+        nameValid: false
+      })
+    }
+    else if (this.state.name.length > 10) {
+      this.setState({
+        validationMessage: 'Folder name cannot be longer than 10 characters',
         nameValid: false
       })
     }

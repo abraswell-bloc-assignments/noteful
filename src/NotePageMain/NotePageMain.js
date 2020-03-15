@@ -50,4 +50,3 @@ NotePageMain.defaultProps = {
     content: '',
   }
 }
-
