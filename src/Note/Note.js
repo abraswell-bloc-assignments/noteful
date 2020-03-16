@@ -17,7 +17,6 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
@@ -41,6 +40,9 @@ export default class Note extends React.Component {
 
   render() {
     const { name, id, modified} = this.props
+    if (!name || !id || !modified) {
+      return null;
+    } 
     const formatDate = format(new Date(modified), 'MMMM do yyyy')
     return (
       <div className='Note'>
