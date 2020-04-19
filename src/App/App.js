@@ -18,8 +18,8 @@ class App extends Component {
     folders: [],
     err: null
   };
-  FolderUrl = 'http://localhost:9090/folders';
-  NoteUrl = 'http://localhost:9090/notes';
+  FolderUrl = 'http://localhost:8000/api/folders';
+  NoteUrl = 'http://localhost:8000/api/notes';
 
   componentDidMount() {
     fetch(this.FolderUrl)
@@ -93,11 +93,11 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {['/', '/folder/:folderId'].map(path => (
+        {['/', '/api/folders/:folderId'].map(path => (
           <Route exact key={path} path={path} component={NoteListNav} />
         ))}
         <Route
-          path='/note/:noteId'
+          path='/api/notes/:noteId'
           render={routeProps => {
             const { noteId } = routeProps.match.params;
             const note = findNote(notes, noteId) || {};
@@ -121,7 +121,7 @@ class App extends Component {
         {/* Main Route */}
         {/* 'notes' prop will be entire notes array from state in '/' Route */}
         {/* ':folderId'  will be the id of the folder in the url */}
-        {['/', '/folder/:folderId'].map(path => (
+        {['/', '/api/folder/:folderId'].map(path => (
           <Route
             exact
             key={path}
@@ -133,7 +133,7 @@ class App extends Component {
         ))}
         {/* Note Route */}
         <Route
-          path='/note/:noteId'
+          path='/api/note/:noteId'
           render={routeProps => {
             // Find the note that has the same id from the url (:noteId)
             return <NotePageMain {...routeProps} />;
