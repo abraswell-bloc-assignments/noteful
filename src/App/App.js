@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import config from '../config';
 import ApiContext from '../ApiContext';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
@@ -18,8 +19,8 @@ class App extends Component {
     folders: [],
     err: null
   };
-  FolderUrl = 'http://localhost:8000/api/folders';
-  NoteUrl = 'http://localhost:8000/api/notes';
+  FolderUrl = `${config.API_ENDPOINT}/folders`;
+  NoteUrl = `${config.API_ENDPOINT}/notes`;
 
   componentDidMount() {
     fetch(this.FolderUrl)
@@ -35,6 +36,7 @@ class App extends Component {
           folders: data,
           error: null
         });
+        console.log(process.env.DATABASE_URL)
       })
       .catch(err => {
         this.setState({
@@ -56,6 +58,7 @@ class App extends Component {
           notes: data,
           error: null
         });
+        console.log(data)
       })
       .catch(err => {
         this.setState({
@@ -93,11 +96,11 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {['/', '/api/folders/:folderid'].map(path => (
+        {['/', '/folders/:folderid'].map(path => (
           <Route exact key={path} path={path} component={NoteListNav} />
         ))}
         <Route
-          path='/api/notes/:noteId'
+          path='/notes/:noteId'
           render={routeProps => {
             const { noteId } = routeProps.match.params;
             const note = findNote(notes, noteId) || {};
@@ -121,7 +124,7 @@ class App extends Component {
         {/* Main Route */}
         {/* 'notes' prop will be entire notes array from state in '/' Route */}
         {/* ':folderid'  will be the id of the folder in the url */}
-        {['/', '/api/folders/:folderid'].map(path => (
+        {['/', '/folders/:folderid'].map(path => (
           <Route
             exact
             key={path}
@@ -133,7 +136,7 @@ class App extends Component {
         ))}
         {/* Note Route */}
         <Route
-          path='/api/notes/:noteId'
+          path='/notes/:noteId'
           render={routeProps => {
             // Find the note that has the same id from the url (:noteId)
             return <NotePageMain {...routeProps} />;
@@ -141,10 +144,10 @@ class App extends Component {
         />
         {/* Add Folder Route */}
         {/* Puts Add Folder form in the Main Window */}
-        <Route path='/api/add-folder' component={AddFolder} />
+        <Route path='/add-folder' component={AddFolder} />
         {/* Add Note Route */}
         {/* Puts Add Note form in the Main Window */}
-        <Route path='/api/add-note' component={AddNote} />
+        <Route path='/add-note' component={AddNote} />
       </>
     );
   }

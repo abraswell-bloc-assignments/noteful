@@ -17,7 +17,7 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -47,7 +47,7 @@ export default class Note extends React.Component {
     return (
       <div className='Note'>
         <h2 className='Note__title'>
-          <Link to={`/api/notes/${id}`}>
+          <Link to={`/notes/${id}`}>
             {name}
           </Link>
         </h2>

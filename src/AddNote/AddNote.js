@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import config from '../config'
 import ApiContext from '../ApiContext'
 import './AddNote.css'
 
@@ -90,7 +91,7 @@ export default class AddNote extends Component {
       })
     };
 
-    fetch('http://localhost:8000/api/notes', options)
+    fetch(`${config.API_ENDPOINT}/notes`, options)
       .then(res => {
         if (!res.ok) {
           throw new Error('Something went wrong')

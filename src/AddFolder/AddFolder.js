@@ -3,6 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import './AddFolder.css'
+import config from '../config'
 import ApiContext from '../ApiContext'
 
 export default class AddFolder extends Component {
@@ -60,7 +61,8 @@ export default class AddFolder extends Component {
       })
     }
 
-    fetch('http://localhost:8000/api/folders', options)
+
+    fetch(`${config.API_ENDPOINT}/folders`, options)
       .then(res => {
         if (!res.ok) {
           throw new Error('Something went wrong')
