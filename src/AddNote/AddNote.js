@@ -85,13 +85,12 @@ export default class AddNote extends Component {
       body: JSON.stringify({
         name: this.state.name,
         modified: new Date(),
-        //folder id might be a problem
-        folder_id: this.state.id,
+        folderid: this.state.id,
         content: this.state.content
       })
     };
 
-    fetch('http://localhost:9090/notes', options)
+    fetch('http://localhost:8000/api/notes', options)
       .then(res => {
         if (!res.ok) {
           throw new Error('Something went wrong')

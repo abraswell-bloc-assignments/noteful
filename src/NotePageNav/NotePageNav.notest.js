@@ -30,7 +30,7 @@ describe(`NotePageNav component`, () => {
       }
     }
     const context = {
-      notes: [{ id: 'test-note-id', folderId: 'test-folder-id' }],
+      notes: [{ id: 'test-note-id', folderid: 'test-folder-id' }],
       folders: [{ id: 'test-folder-id', name: 'Important' }]
     }
 

@@ -93,7 +93,7 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {['/', '/api/folders/:folderId'].map(path => (
+        {['/', '/api/folders/:folderid'].map(path => (
           <Route exact key={path} path={path} component={NoteListNav} />
         ))}
         <Route
@@ -101,7 +101,7 @@ class App extends Component {
           render={routeProps => {
             const { noteId } = routeProps.match.params;
             const note = findNote(notes, noteId) || {};
-            const folder = findFolder(folders, note.folder_id);
+            const folder = findFolder(folders, note.folderid);
             return <NotePageNav {...routeProps} folder={folder} />;
           }}
         />
@@ -120,8 +120,8 @@ class App extends Component {
       <>
         {/* Main Route */}
         {/* 'notes' prop will be entire notes array from state in '/' Route */}
-        {/* ':folderId'  will be the id of the folder in the url */}
-        {['/', '/api/folders/:folderId'].map(path => (
+        {/* ':folderid'  will be the id of the folder in the url */}
+        {['/', '/api/folders/:folderid'].map(path => (
           <Route
             exact
             key={path}
@@ -141,10 +141,10 @@ class App extends Component {
         />
         {/* Add Folder Route */}
         {/* Puts Add Folder form in the Main Window */}
-        <Route path='/add-folder' component={AddFolder} />
+        <Route path='/api/add-folder' component={AddFolder} />
         {/* Add Note Route */}
         {/* Puts Add Note form in the Main Window */}
-        <Route path='/add-note' component={AddNote} />
+        <Route path='/api/add-note' component={AddNote} />
       </>
     );
   }
