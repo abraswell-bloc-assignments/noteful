@@ -85,7 +85,8 @@ export default class AddNote extends Component {
       body: JSON.stringify({
         name: this.state.name,
         modified: new Date(),
-        folderId: this.state.id,
+        //folder id might be a problem
+        folder_id: this.state.id,
         content: this.state.content
       })
     };
