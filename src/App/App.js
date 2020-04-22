@@ -56,7 +56,8 @@ class App extends Component {
         this.setState({
           notes: data,
           error: null
-        })
+        });
+        console.log(data)
       })
       .catch(err => {
         this.setState({
@@ -97,11 +98,11 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {['/', '/folder/:folderid'].map(path => (
+        {['/', '/folders/:folderid'].map(path => (
           <Route exact key={path} path={path} component={NoteListNav} />
         ))}
         <Route
-          path='/note/:noteId'
+          path='/notes/:noteId'
           render={routeProps => {
             const { noteId } = routeProps.match.params
             const note = findNote(notes, noteId) || {}
@@ -120,7 +121,9 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {['/', '/folder/:folderid'].map(path => (
+        {/* 'notes' prop will be entire notes array from state in '/' Route */}
+        {/* ':folderid'  will be the id of the folder in the url */}
+        {['/', '/folders/:folderid'].map(path => (
           <Route
             exact
             key={path}
@@ -132,7 +135,7 @@ class App extends Component {
         ))}
         {/* Note Route */}
         <Route
-          path='/note/:noteId'
+          path='/notes/:noteId'
           render={routeProps => {
             return <NotePageMain {...routeProps} />
           }}

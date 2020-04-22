@@ -64,7 +64,6 @@ export default class AddNote extends Component {
   }
 
   
-
   updateName = (name) => {
     this.setState({ name: name })
   }
