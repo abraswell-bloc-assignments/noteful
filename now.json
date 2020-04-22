@@ -1,15 +1,16 @@
 {   
     "version": 2, 
+    "alias": "Amy-Braswell-Noteful",
     "name": "noteful",   
     "routes": 
         [              
-            { 
-                "src": "/.*", 
-                "dest": "/index.html" 
-            },
             {
+                "src": "^/static/(.*)",
+                "dest": "/static/$1"
+              },
+              {
                 "src": ".*",
                 "dest": "/index.html"
-            }   
+              } 
         ] 
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './AddFolder.css'
+
 
 
 export default class AddFolder extends Component {
@@ -132,8 +132,4 @@ export default class AddFolder extends Component {
   }
 }
 
-AddFolder.propTypes = {
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
-}
+
