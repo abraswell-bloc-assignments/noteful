@@ -3,6 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
+import config from '../config'
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -56,7 +57,7 @@ export default class AddNote extends Component {
           nameValid: true
         },
         () => {
-          this.handleAddNote();
+          this.handleAddNote()
         }
       )
     }
@@ -66,11 +67,11 @@ export default class AddNote extends Component {
 
   updateName = (name) => {
     this.setState({ name: name })
-  };
+  }
 
   updateContent = (content) => {
     this.setState({ content: content })
-  };
+  }
 
   idChange = (letter) => {
     this.setState({ id: letter })
@@ -85,12 +86,12 @@ export default class AddNote extends Component {
       body: JSON.stringify({
         name: this.state.name,
         modified: new Date(),
-        folderId: this.state.id,
+        folderid: this.state.id,
         content: this.state.content
       })
-    };
+    }
 
-    fetch('http://localhost:9090/notes', options)
+    fetch(`${config.API_ENDPOINT}/notes/add-note`, options)
       .then(res => {
         if (!res.ok) {
           throw new Error('Something went wrong')
@@ -140,7 +141,7 @@ export default class AddNote extends Component {
               name='note'
               aria-required="true"
               onChange={event => {
-                this.updateName(event.target.value);
+                this.updateName(event.target.value)
               }}
             />
           </label>
@@ -153,7 +154,7 @@ export default class AddNote extends Component {
               id='note-content-input'
               name='content'
               onChange={event => {
-                this.updateContent(event.target.value);
+                this.updateContent(event.target.value)
               }}
             />
           </label>
@@ -166,7 +167,7 @@ export default class AddNote extends Component {
               name='note-folder-id'
               aria-required="true"
               onChange={event => {
-                this.idChange(event.target.value);
+                this.idChange(event.target.value)
               }}
             >
               <option value={null}>Select Folder</option>
@@ -194,7 +195,7 @@ export default class AddNote extends Component {
           </div>
         )}
       </section>
-    );
+    )
   }
 }
 

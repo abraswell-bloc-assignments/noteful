@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ApiContext from '../ApiContext'
 import PropTypes from 'prop-types'
+import ApiContext from '../ApiContext'
 import config from '../config'
 import './Note.css'
 
@@ -11,6 +11,7 @@ export default class Note extends React.Component {
 
   static defaultProps ={
     onDeleteNote: () => {},
+    onEditNote: () => {},
   }
   static contextType = ApiContext
 
@@ -31,17 +32,20 @@ export default class Note extends React.Component {
       .then(() => {
         this.context.deleteNote(noteId)
         // allow parent to perform extra behaviour
+        console.log(noteId)
         this.props.onDeleteNote(noteId)
+        console.log(noteId)
       })
       .catch(error => {
         console.error({ error })
       })
   }
 
+  
   render() {
     const { name, id, modified} = this.props
     if (!name || !id || !modified) {
-      return null;
+      return null
     } 
     const formatDate = format(new Date(modified), 'MMMM do yyyy')
     return (
@@ -79,4 +83,4 @@ Note.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   handleDelete: PropTypes.func
-};
+}

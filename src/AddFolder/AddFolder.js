@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
-import './AddFolder.css'
 import ApiContext from '../ApiContext'
+import config from '../config'
+import './AddFolder.css'
+
 
 export default class AddFolder extends Component {
   constructor() {
@@ -13,7 +15,7 @@ export default class AddFolder extends Component {
       name: '',
       nameValid: false,
       validationMessage: ''
-    };
+    }
   }
   static contextType = ApiContext
 
@@ -50,6 +52,7 @@ export default class AddFolder extends Component {
   }
 
   handleAddFolder = () => {
+
     const options = {
       method: 'POST',
       headers: {
@@ -60,7 +63,7 @@ export default class AddFolder extends Component {
       })
     }
 
-    fetch('http://localhost:9090/folders', options)
+    fetch(`${config.API_ENDPOINT}/folders/add-folder`, options)
       .then(res => {
         if (!res.ok) {
           throw new Error('Something went wrong')

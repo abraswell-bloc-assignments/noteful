@@ -1,67 +1,74 @@
-import React, { Component } from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ApiContext from '../ApiContext';
-import NoteListNav from '../NoteListNav/NoteListNav';
-import NotePageNav from '../NotePageNav/NotePageNav';
-import NoteListMain from '../NoteListMain/NoteListMain';
-import NotePageMain from '../NotePageMain/NotePageMain';
-import AddFolder from '../AddFolder/AddFolder';
-import AddNote from '../AddNote/AddNote';
-import NotefulError from '../NotefulError/NotefulError';
-import { findNote, findFolder } from '../notes-helpers';
-import './App.css';
+import React, { Component } from 'react'
+import { Route, Link, withRouter } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import config from '../config';
+import AddFolder from '../AddFolder/AddFolder'
+import AddNote from '../AddNote/AddNote'
+import ApiContext from '../ApiContext'
+import NotefulError from '../NotefulError/NotefulError'
+import NoteListNav from '../NoteListNav/NoteListNav'
+import NotePageNav from '../NotePageNav/NotePageNav'
+import NoteListMain from '../NoteListMain/NoteListMain'
+import NotePageMain from '../NotePageMain/NotePageMain'
+import { findNote, findFolder } from '../notes-helpers'
+import './App.css'
 
 class App extends Component {
   state = {
     notes: [],
     folders: [],
     err: null
-  };
-  FolderUrl = 'http://localhost:9090/folders';
-  NoteUrl = 'http://localhost:9090/notes';
+  }
+  FolderUrl = `${config.API_ENDPOINT}/folders`
+  NoteUrl = `${config.API_ENDPOINT}/notes`
 
   componentDidMount() {
     fetch(this.FolderUrl)
       .then(res => {
         if (!res.ok) {
-          throw new Error('Something went wrong, please try again later.');
+          throw new Error('Something went wrong, please try again later.')
         }
-        return res;
+        return res
       })
       .then(res => res.json())
       .then(data => {
         this.setState({
           folders: data,
           error: null
-        });
+        })
       })
       .catch(err => {
         this.setState({
           error: err.message
-        });
-        console.log(err);
-      });
+        })
+        console.log(err)
+      })
 
     fetch(this.NoteUrl)
       .then(res => {
         if (!res.ok) {
-          throw new Error('Something went wrong, please try again later.');
+          throw new Error('Something went wrong, please try again later.')
         }
-        return res;
+        return res
       })
       .then(res => res.json())
       .then(data => {
         this.setState({
           notes: data,
           error: null
-        });
+        })
       })
       .catch(err => {
         this.setState({
           error: err.message
-        });
-      });
+        })
+      })
+  }
+
+  handleEditNote = noteId => {
+    this.setState({
+        notes: this.state.notes.filter(note => note.id !== noteId)
+    })
   }
 
   handleDeleteNote = noteId => {
@@ -76,58 +83,50 @@ class App extends Component {
         folders: [...this.state.folders, folder]
       },
       () => this.props.history.replace('/')
-    );
-  };
+    )
+  }
 
   handleAddNote = note => {
     this.setState({ notes: [...this.state.notes, note] }, () =>
       this.props.history.replace('/')
-    );
-  };
+    )
+  }
 
   renderNavRoutes() {
-    // Show/hide components in SIDEBAR section based on route
-    // Main route leads to list of Folders
-    // All other routes lead to <NotePageNav /> 'back' button
-    const { notes, folders } = this.state;
+    const { notes, folders } = this.state
     return (
       <>
         {/* Main Route */}
-        {['/', '/folder/:folderId'].map(path => (
+        {['/', '/folder/:folderid'].map(path => (
           <Route exact key={path} path={path} component={NoteListNav} />
         ))}
         <Route
           path='/note/:noteId'
           render={routeProps => {
-            const { noteId } = routeProps.match.params;
-            const note = findNote(notes, noteId) || {};
-            const folder = findFolder(folders, note.folderId);
-            return <NotePageNav {...routeProps} folder={folder} />;
+            const { noteId } = routeProps.match.params
+            const note = findNote(notes, noteId) || {}
+            const folder = findFolder(folders, note.folderid)
+            return <NotePageNav {...routeProps} folder={folder} />
           }}
         />
         {/* Other Routes */}
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-note' component={NotePageNav} />
       </>
-    );
+    )
   }
 
   renderMainRoutes() {
-    // Show/hide components in MAIN section based on route
-    // Main route leads to list of Notes
-    // All other routes lead to <NotePageNav /> 'back' button
     return (
       <>
         {/* Main Route */}
-        {/* 'notes' prop will be entire notes array from state in '/' Route */}
-        {/* ':folderId'  will be the id of the folder in the url */}
-        {['/', '/folder/:folderId'].map(path => (
+        {['/', '/folder/:folderid'].map(path => (
           <Route
             exact
             key={path}
             path={path}
             render={routeProps => {
-              return <NoteListMain {...routeProps} />;
+              return <NoteListMain {...routeProps} />
             }}
           />
         ))}
@@ -135,18 +134,15 @@ class App extends Component {
         <Route
           path='/note/:noteId'
           render={routeProps => {
-            // Find the note that has the same id from the url (:noteId)
-            return <NotePageMain {...routeProps} />;
+            return <NotePageMain {...routeProps} />
           }}
         />
         {/* Add Folder Route */}
-        {/* Puts Add Folder form in the Main Window */}
         <Route path='/add-folder' component={AddFolder} />
         {/* Add Note Route */}
-        {/* Puts Add Note form in the Main Window */}
         <Route path='/add-note' component={AddNote} />
       </>
-    );
+    )
   }
   render() {
     return (
@@ -154,6 +150,7 @@ class App extends Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
+          editNote: this.handleEditNote,
           deleteNote: this.handleDeleteNote,
           handleAddNote: this.handleAddNote,
           handleAddFolder: this.handleAddFolder
@@ -174,8 +171,8 @@ class App extends Component {
           </NotefulError>
         </div>
       </ApiContext.Provider>
-    );
+    )
   }
 }
 
-export default withRouter(App);
+export default withRouter(App)

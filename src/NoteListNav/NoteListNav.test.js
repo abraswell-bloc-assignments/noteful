@@ -8,7 +8,7 @@ import NoteListNav from './NoteListNav'
 //   const div = document.createElement('div')
 //   ReactDOM.render(<NoteListNav />, div)
 //   ReactDOM.unmountComponentAtNode(div)
-//   });
+//   })
 
   describe(`NoteListNav component`, () => {
     const props = {
