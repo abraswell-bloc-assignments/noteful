@@ -1,9 +1,7 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import PropTypes from 'prop-types'
+import Note from '../Note/Note'
 import ApiContext from '../ApiContext'
 import config from '../config'
-import Note from '../Note/Note'
 import { findNote } from '../notes-helpers'
 import './NotePageMain.css'
 
@@ -16,10 +14,6 @@ export default class NotePageMain extends React.Component {
   static contextType = ApiContext
 
   deleteNote = noteId => {
-    this.props.history.push(`/`)
-  }
-
-  editNote = noteId => {
     this.props.history.push(`/`)
   }
 
@@ -60,15 +54,6 @@ export default class NotePageMain extends React.Component {
           onDeleteNote={this.deleteNote}
           onEditNote={this.editNote}
         />
-        <button
-          className='Note__edit'
-          type='button'
-          onClick={this.handleClickEdit}
-        > 
-          <FontAwesomeIcon icon='pencil-alt' />
-          {' '}
-          edit
-        </button>
         <div className='NotePageMain__content'>
           {note.content.split(/\n \r|\n/).map((para, i) =>
             <p key={i}>{para}</p>
@@ -76,18 +61,5 @@ export default class NotePageMain extends React.Component {
         </div>
       </section>
     )
-  }
-}
-
-NotePageMain.propTypes = {
-  history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  handleEdit: PropTypes.func
-}
-
-NotePageMain.defaultProps = {
-  note: {
-    content: '',
   }
 }

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotePageMain component renders a .NotePageMain by default 1`] = `
+<section
+  className="NotePageMain"
+>
+  <div
+    className="NotePageMain__content"
+  >
+    <p>
+      
+    </p>
+  </div>
+</section>
+`;

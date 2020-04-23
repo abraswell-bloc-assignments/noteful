@@ -2,7 +2,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import NotePageMain from './NotePageMain'
 
-describe(`NotePageMain component`, () => {
+describe.only(`NotePageMain component`, () => {
   const props = {
     note: {
       "id": "cbc787a0-ffaf-11e8-8eb2-f2801f1b9fd1",
@@ -10,6 +10,11 @@ describe(`NotePageMain component`, () => {
       "modified": "2019-01-03T00:00:00.000Z",
       "folderid": "2",
       "content": "Corporis accusamus placeat.\n \rUnde."
+    },
+    match: {
+      params: {
+         noteId: "123"
+      }
     }
   }
 
