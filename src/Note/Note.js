@@ -29,9 +29,8 @@ export default class Note extends React.Component {
         if (!res.ok) {
           throw new Error('Something went wrong')
         }
-        return res
+        return res.json
       })
-      .then(res => res.json())
       .then(() => {
         this.context.deleteNote(noteId)
         // allow parent to perform extra behaviour
