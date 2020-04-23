@@ -1,16 +1,7 @@
-import React from 'react'
-import renderer from 'react-test-renderer'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 import Note from './Note'
-import { Link } from 'react-router-dom'
-import { format } from 'date-fns'
-
-
-  it('renders without crashing', () => {
-    const div = document.createElement('div')
-    ReactDOM.render(<Note />, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
 
 describe(`Note component`, () => {
   const props = {
@@ -20,17 +11,12 @@ describe(`Note component`, () => {
   }
 
   it('renders a .Note by default', () => {
-    const tree = renderer
-    .create(<Note />)
-    .toJSON()
-    expect(tree).toMatchSnapshot()
+    const wrapper = shallow(<Note />)
+    expect(toJson(wrapper)).toMatchSnapshot()
   })
 
   it('renders the Note given props', () => {
-    const tree = renderer  
-    .create(<Note {...props} />)
-    .toJSON()
-    expect(tree).toMatchSnapshot()
+    const wrapper = shallow(<Note {...props} />)
+    expect(toJson(wrapper)).toMatchSnapshot()
   })
-  
 })

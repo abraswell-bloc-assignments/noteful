@@ -180,7 +180,7 @@ export default class AddNote extends Component {
 
         <div className='buttons'>
           <button type='submit'>
-          <FontAwesomeIcon icon='plus' />
+          <FontAwesomeIcon icon={['fa', 'plus']} />
             <br />
             Note
 

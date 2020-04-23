@@ -1,14 +1,21 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
-// import ReactDOM from 'react-dom'
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import NoteListNav from './NoteListNav'
 
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div')
-//   ReactDOM.render(<NoteListNav />, div)
-//   ReactDOM.unmountComponentAtNode(div)
-//   })
+it('renders without crashing', () => {
+  const div = document.createElement('div')
+  ReactDOM.render(
+    <BrowserRouter>
+      <NoteListNav />
+    </BrowserRouter>,
+    div
+  )
+  ReactDOM.unmountComponentAtNode(div)
+  })
 
   describe(`NoteListNav component`, () => {
     const props = {
@@ -59,17 +66,14 @@ import NoteListNav from './NoteListNav'
     }
   
     it('renders a .NoteListNav by default', () => {
-      const wrapper = renderer
-      .create(<NoteListNav />)
-      .toJSON()
-      expect(wrapper).toMatchSnapshot()
+      const wrapper = shallow(<NoteListNav />)
+      expect(toJson(wrapper)).toMatchSnapshot()
     })
+
+    
   
     it('renders a link in ul for each folder in array', () => {
-      const ul = renderer
-        .create(<NoteListNav {...props} />)
-        .find('ul')
-        .toJSON()
-      expect(ul).toMatchSnapshot()
+      const wrapper = shallow(<NoteListNav {...props} />)
+      expect(toJson(wrapper)).toMatchSnapshot()
     })
   })

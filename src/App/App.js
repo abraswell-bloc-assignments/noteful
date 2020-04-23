@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble,faPencilAlt,} 
+  from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import config from '../config';
 import AddFolder from '../AddFolder/AddFolder'
@@ -12,6 +16,8 @@ import NoteListMain from '../NoteListMain/NoteListMain'
 import NotePageMain from '../NotePageMain/NotePageMain'
 import { findNote, findFolder } from '../notes-helpers'
 import './App.css'
+
+library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAlt)
 
 class App extends Component {
   state = {
@@ -165,7 +171,7 @@ class App extends Component {
           <header className='App__header'>
             <h1>
               <Link to='/'>Noteful</Link>{' '}
-              <FontAwesomeIcon icon='check-double' />
+              <FontAwesomeIcon icon={['fa', 'check-double']} />
             </h1>
           </header>
           <NotefulError>

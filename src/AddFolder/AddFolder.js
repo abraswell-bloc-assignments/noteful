@@ -115,7 +115,7 @@ export default class AddFolder extends Component {
           </div>
           <div className='buttons'>
             <button type='submit'>
-            <FontAwesomeIcon icon='plus' />
+            <FontAwesomeIcon icon={['fa', 'plus']} />
               <br />
               Folder
             </button>

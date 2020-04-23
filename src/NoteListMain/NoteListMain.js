@@ -40,7 +40,7 @@ export default class NoteListMain extends React.Component {
             type='button'
             className='NoteListMain__add-note-button'
           >
-            <FontAwesomeIcon icon='plus' />
+            <FontAwesomeIcon icon={['fa', 'plus']} />
             <br />
             Note
           </CircleButton>
@@ -48,9 +48,4 @@ export default class NoteListMain extends React.Component {
       </main>
     )
   }
-}
-
-
-NoteListMain.defaultProps = {
-  notes: [],
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import PropTypes from 'prop-types'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './Note.css'
@@ -15,11 +14,39 @@ export default class Note extends React.Component {
   }
   static contextType = ApiContext
 
-  handleClickDelete = e => {
+
+  handleClickDelete = () => {
+    const noteId = this.props.id
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+    }}
+    const url = (`${config.API_ENDPOINT}/notes/${noteId}`)
+    console.log(url)
+      fetch(url, options)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong')
+        }
+        return res
+      })
+      .then(res => res.json())
+      .then(() => {
+        this.context.deleteNote(noteId)
+        // allow parent to perform extra behaviour
+        this.props.onDeleteNote(noteId)
+      })
+      .catch(error => {
+        console.error({ error })
+      })
+  }
+
+  handleClickEdit = e => {
     e.preventDefault()
     const noteId = this.props.id
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
-      method: 'DELETE',
+      method: 'PATCH',
       headers: {
         'content-type': 'application/json'
       },
@@ -30,11 +57,9 @@ export default class Note extends React.Component {
         return res.json()
       })
       .then(() => {
-        this.context.deleteNote(noteId)
+        this.context.editNote(noteId)
         // allow parent to perform extra behaviour
-        console.log(noteId)
-        this.props.onDeleteNote(noteId)
-        console.log(noteId)
+        this.props.onEditNote(noteId)
       })
       .catch(error => {
         console.error({ error })
@@ -60,7 +85,7 @@ export default class Note extends React.Component {
           type='button'
           onClick={this.handleClickDelete}
         >
-          <FontAwesomeIcon icon='trash-alt' />
+          <FontAwesomeIcon icon={['fa', 'trash-alt']} />
           {' '}
           remove
         </button>
@@ -78,9 +103,3 @@ export default class Note extends React.Component {
   }
 }
 
-// Note.propTypes = {
-//   modified: PropTypes.string,
-//   id: PropTypes.string,
-//   name: PropTypes.string,
-//   handleDelete: PropTypes.func
-// }

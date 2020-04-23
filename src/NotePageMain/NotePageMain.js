@@ -1,7 +1,7 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import ApiContext from '../ApiContext'
-import config from '../config'
 import { findNote } from '../notes-helpers'
 import './NotePageMain.css'
 
@@ -13,32 +13,12 @@ export default class NotePageMain extends React.Component {
   }
   static contextType = ApiContext
 
-  deleteNote = noteId => {
+  handleDeleteNote = noteId => {
     this.props.history.push(`/`)
   }
 
-  handleClickEdit = e => {
-    e.preventDefault()
-    const noteId = this.props.id
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      },
-    })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
-      .then(() => {
-        this.context.editNote(noteId)
-        // allow parent to perform extra behaviour
-        this.props.onEditNote(noteId)
-      })
-      .catch(error => {
-        console.error({ error })
-      })
+  handleEditNote = noteId => {
+    this.props.history.push(`/`)
   }
 
   render(){
@@ -51,9 +31,18 @@ export default class NotePageMain extends React.Component {
           id={note.id}
           name={note.name}
           modified={note.modified}
-          onDeleteNote={this.deleteNote}
-          onEditNote={this.editNote}
+          onDeleteNote={this.handleDeleteNote}
+          onEditNote={this.handleEditNote}
         />
+        <button
+          className='Note__edit'
+          type='button'
+          onClick={this.handleClickEdit}
+        >
+          <FontAwesomeIcon icon={['fa', 'edit']} />
+          {' '}
+          remove
+        </button>
         <div className='NotePageMain__content'>
           {note.content.split(/\n \r|\n/).map((para, i) =>
             <p key={i}>{para}</p>
