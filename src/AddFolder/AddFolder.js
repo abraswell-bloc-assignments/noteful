@@ -19,6 +19,10 @@ export default class AddFolder extends Component {
   }
   static contextType = ApiContext
 
+  updateName = (name) => {
+    this.setState({ name: name })
+  }
+  
   isNameValid = (e) => {
     e.preventDefault()
     if (!this.state.name) {
@@ -79,10 +83,6 @@ export default class AddFolder extends Component {
           error: err.message
         })
       })
-  }
-
-  updateName = (name) => {
-    this.setState({ name: name })
   }
 
   render() {

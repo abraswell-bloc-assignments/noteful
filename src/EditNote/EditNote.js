@@ -16,9 +16,9 @@ export default class EditNote extends Component {
       content: '',
       folderid: '',
       nameValid: false,
-      folderidValid: false,
+      folderIdValid: false,
       validationNameMessage: '',
-      validationfolderidMessage: ''
+      validationFolderIdMessage: ''
     }
   }
   static contextType = ApiContext
@@ -45,20 +45,22 @@ export default class EditNote extends Component {
   //   }
   // }
 
-  // isfolderidValid = (e) => {
+
+  // isFolderIdValid = (e) => {
   //   e.preventDefault()
   //   if (!this.state.folderid) {
   //     this.setState({
-  //       validationfolderidMessage: 'You must choose a valid folder',
-  //       folderidValid: false
+  //       validationFolderIdMessage: 'You must choose a valid folder',
+  //       folderIdValid: false
   //     })
   //   } else {
   //     this.setState(
   //       {
-  //         validationfolderidMessage: '',
+  //         validationFolderIdMessage: '',
   //         nameValid: true
   //       },
   //       () => {
+  //  // DON'T THINK THIS METHOD EXISTS - IS IT A REFERENCE TO CONTEXT - LOOK AT APP.JS
   //         this.editNote()
   //       }
   //     )
@@ -78,15 +80,6 @@ export default class EditNote extends Component {
     this.setState({ folderid: folderid })
   }
 
-
-  // isNameValid = (e) => {
-  //   e.preventDefault()
-  //   if (!this.state.name) {
-  //     this.setState({
-  //       validationNameMessage: 'Please enter a name',
-  //       nameValid: false
-  //     })
-
   handleClickEdit = (noteId) => {
     const options = {
       method: 'PATCH',
@@ -101,7 +94,7 @@ export default class EditNote extends Component {
     }
     const url = (`${config.API_ENDPOINT}/notes/edit-note/${this.context.editNoteId}`)
     console.log("url:", url)
-    debugger
+    // debugger
     fetch(url, options)
       .then(res => {
         if (!res.ok){
@@ -110,9 +103,9 @@ export default class EditNote extends Component {
         return res.json()
       })
       .then(() => {
-        this.context.editNote(noteId)
+        this.context.handleEditNote(noteId)
         // allow parent to perform extra behaviour
-        this.props.onEditNote(noteId)
+        this.props.handleEditNote(noteId)
       })
       .catch(error => {
         console.error({ error })

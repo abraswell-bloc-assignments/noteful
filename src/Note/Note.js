@@ -30,7 +30,7 @@ export default class Note extends React.Component {
         return res.json
       })
       .then(() => {
-        this.context.deleteNote(noteId)
+        this.context.handleDeleteNote(noteId)
         // allow parent to perform extra behaviour
         this.props.onDeleteNote(noteId)
       })

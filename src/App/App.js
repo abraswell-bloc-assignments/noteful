@@ -27,6 +27,7 @@ class App extends Component {
     folders: [],
     err: null
   }
+
   FolderUrl = `${config.API_ENDPOINT}/folders`
   NoteUrl = `${config.API_ENDPOINT}/notes`
 
@@ -73,6 +74,15 @@ class App extends Component {
       })
   }
 
+  handleAddFolder = folder => {
+    this.setState(
+      {
+        folders: [...this.state.folders, folder]
+      },
+      () => this.props.history.replace('/')
+    )
+  }
+
   handleAddNote = note => {
     this.setState({ notes: [...this.state.notes, note] }, () =>
       this.props.history.replace('/')
@@ -91,16 +101,6 @@ class App extends Component {
     })
   }
 
-  handleAddFolder = folder => {
-    this.setState(
-      {
-        folders: [...this.state.folders, folder]
-      },
-      () => this.props.history.replace('/')
-    )
-  }
-
-
   renderNavRoutes() {
     const { notes, folders } = this.state
     return (
@@ -118,7 +118,7 @@ class App extends Component {
             return <NotePageNav {...routeProps} folder={folder} />
           }}
         />
-        {/* Other Routes */}
+        {/* Other Routes (Back Button) */}
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-note' component={NotePageNav} />
         <Route path='/edit-note' component={NotePageNav} />
@@ -130,8 +130,6 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {/* 'notes' prop will be entire notes array from state in '/' Route */}
-        {/* ':folderid'  will be the id of the folder in the url */}
         {['/', '/folders/:folderid'].map(path => (
           <Route
             exact
@@ -149,10 +147,11 @@ class App extends Component {
             return <NotePageMain {...routeProps} />
           }}
         />
-        {/* Add Folder Route */}
+        {/* Add-Folder Route */}
         <Route path='/add-folder' component={AddFolder} />
-        {/* Add Note Route */}
+        {/* Add-Note Route */}
         <Route path='/add-note' component={AddNote} />
+        {/* Edit-Note Route */}
         <Route path='/edit-note' component={EditNote} />
       </>
     )
@@ -163,10 +162,9 @@ class App extends Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          deleteNote: this.handleDeleteNote,
-          editNote: this.handleEditNote,
-          handleAddNote: this.handleAddNote,
           handleAddFolder: this.handleAddFolder,
+          handleAddNote: this.handleAddNote,
+          handleDeleteNote: this.handleDeleteNote,
           handleEditNote: this.handleEditNote, 
           editNoteId: this.state.editNoteId
         }}

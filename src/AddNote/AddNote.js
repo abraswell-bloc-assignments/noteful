@@ -10,19 +10,48 @@ export default class AddNote extends Component {
     super()
     this.state = {
       error: null,
-      name: '',
-      content: '',
       id: '',
-      nameValid: false,
       idValid: false,
+      validationIdMessage: '',
+      name: '',
+      nameValid: false,
       validationNameMessage: '',
-      validationIdMessage: ''
+      content: ''
     }
   }
   static contextType = ApiContext
 
   static defaultProps = {
     folders: []
+  }
+
+  idChange = (letter) => {
+    this.setState({ id: letter })
+  }
+
+  updateName = (name) => {
+    this.setState({ name: name })
+  }
+
+  updateContent = (content) => {
+    this.setState({ content: content })
+  }
+
+  isIdValid = (e) => {
+    e.preventDefault()
+    if (!this.state.id) {
+      this.setState({
+        validationIdMessage: 'You must choose a valid folder',
+        idValid: false
+      })
+    } else {
+      this.setState(
+        {
+          validationIdMessage: '',
+          nameValid: true
+        }
+      )
+    }
   }
 
   isNameValid = (e) => {
@@ -38,41 +67,11 @@ export default class AddNote extends Component {
           validationNameMessage: '',
           nameValid: true
         },
-      )
-    }
-  }
-
-  isIdValid = (e) => {
-    e.preventDefault()
-    if (!this.state.id) {
-      this.setState({
-        validationIdMessage: 'You must choose a valid folder',
-        idValid: false
-      })
-    } else {
-      this.setState(
-        {
-          validationIdMessage: '',
-          nameValid: true
-        },
         () => {
           this.handleAddNote()
         }
       )
     }
-  }
-
-  
-  updateName = (name) => {
-    this.setState({ name: name })
-  }
-
-  updateContent = (content) => {
-    this.setState({ content: content })
-  }
-
-  idChange = (letter) => {
-    this.setState({ id: letter })
   }
 
   handleAddNote = () => {
@@ -122,8 +121,8 @@ export default class AddNote extends Component {
         <NotefulForm
           className='AddNote__Form'
           onSubmit={event => {
-            this.isNameValid(event)
             this.isIdValid(event)
+            this.isNameValid(event)
           }}
         >
           

@@ -18,7 +18,7 @@ export default class NotePageMain extends React.Component {
     this.props.history.push(`/`)
   }
 
-  handleButtonClick = (noteId) => {
+  handleEditClick = (noteId) => {
     this.context.handleEditNote(noteId)
   }
 
@@ -33,13 +33,12 @@ export default class NotePageMain extends React.Component {
           name={note.name}
           modified={note.modified}
           onDeleteNote={this.handleDeleteNote}
-          onEditNote={this.handleEditNote}
         />
 
         <button
           className='Note__edit'
           type='button'
-          onClick={() => this.handleButtonClick(noteId)}
+          onClick={() => this.handleEditClick(noteId)}
         >
           <Link to={`/edit-note`}>
             <FontAwesomeIcon 
