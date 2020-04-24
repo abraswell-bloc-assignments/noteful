@@ -6,10 +6,10 @@ exports[`NotePageMain component renders a .NotePageMain by default 1`] = `
 >
   <Note
     onDeleteNote={[Function]}
-    onEditNote={[Function]}
   />
   <button
     className="Note__edit"
+    onClick={[Function]}
     type="button"
   >
     <Link

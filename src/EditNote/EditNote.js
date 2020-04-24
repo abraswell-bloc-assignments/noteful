@@ -12,12 +12,13 @@ export default class EditNote extends Component {
       error: null,
       name: '',
       id: '',
+      editNoteId: '',
       content: '',
-      folderId: '',
+      folderid: '',
       nameValid: false,
-      folderIdValid: false,
+      folderidValid: false,
       validationNameMessage: '',
-      validationFolderIdMessage: ''
+      validationfolderidMessage: ''
     }
   }
   static contextType = ApiContext
@@ -25,6 +26,7 @@ export default class EditNote extends Component {
   static defaultProps = {
     folders: []
   }
+  
 
   // isNameValid = (e) => {
   //   e.preventDefault()
@@ -43,17 +45,17 @@ export default class EditNote extends Component {
   //   }
   // }
 
-  // isFolderIdValid = (e) => {
+  // isfolderidValid = (e) => {
   //   e.preventDefault()
-  //   if (!this.state.folderId) {
+  //   if (!this.state.folderid) {
   //     this.setState({
-  //       validationFolderIdMessage: 'You must choose a valid folder',
-  //       folderIdValid: false
+  //       validationfolderidMessage: 'You must choose a valid folder',
+  //       folderidValid: false
   //     })
   //   } else {
   //     this.setState(
   //       {
-  //         validationFolderIdMessage: '',
+  //         validationfolderidMessage: '',
   //         nameValid: true
   //       },
   //       () => {
@@ -66,31 +68,60 @@ export default class EditNote extends Component {
   
   updateName = (name) => {
     this.setState({ name: name })
-
   }
 
   updateContent = (content) => {
     this.setState({ content: content })
   }
 
-  updateFolderId = (folderId) => {
-    this.setState({ folderId: folderId })
+  updateFolderId = (folderid) => {
+    this.setState({ folderid: folderid })
   }
 
-  handleClickEdit = () => {
-    const noteId = this.context.notes
+  componentDidMount(){
+    console.log(this.context.editNoteId)
+    this.updateNoteId()
+  }
+
+  updateNoteId = () => {
+    const noteId = (this.context.editNoteId)
+
+    this.setState({
+          editNoteId: noteId
+          })
+    console.log(noteId)
+    console.log(this.state.editNoteId)
+  }
+
+    // isNameValid = (e) => {
+  //   e.preventDefault()
+  //   if (!this.state.name) {
+  //     this.setState({
+  //       validationNameMessage: 'Please enter a name',
+  //       nameValid: false
+  //     })
+
+  handleClickEdit = (noteId) => {
+    this.updateNoteId()
     const options = {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
-    }}
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        content: this.state.content,
+        folderid: this.state.folderid
+      })
+    }
     const url = (`${config.API_ENDPOINT}/notes/edit-note/${noteId}`)
-    console.log(noteId)
+    console.log(url)
     fetch(url, options)
       .then(res => {
         if (!res.ok){
           throw new Error('Something went wrong')
         }
+        alert(url)
         return res.json()
       })
       .then(() => {
@@ -104,11 +135,11 @@ export default class EditNote extends Component {
   }
 
 
-  render() {
-  console.log(this.context)
+  render() { 
     return (
       <section className='EditNote'>
         <h2>Edit note</h2>
+        <h3>Please edit at least one field</h3>
         {!this.state.nameValid && (
           <div>
             <p className='error__message'>{this.state.validationNameMessage}</p>
@@ -122,9 +153,6 @@ export default class EditNote extends Component {
         )}
         <NotefulForm
           className='EditNote__Form'
-          // onSubmit={event => {
-          //   this.handleClickEdit(event)
-          // }}
         >
           
         <div className='field form-group'>
@@ -162,9 +190,6 @@ export default class EditNote extends Component {
               id='note-folder-select'
               name='note-folder-id'
               aria-required="true"
-              onChange={event => {
-                this.idChange(event.target.value)
-              }}
             >
               <option value={null}>Select Folder</option>
               {this.context.folders.map(folder => (

@@ -18,22 +18,14 @@ export default class NotePageMain extends React.Component {
     this.props.history.push(`/`)
   }
 
-  // handleEditNote = noteId => {
-  //   this.props.history.push(`/`)
-  // }
-
   handleButtonClick = (noteId) => {
-    // console.log(noteId)
     this.context.handleEditNote(noteId)
-    // console.log("ping")
   }
 
   render(){
-    // console.log(this.context)
     const { notes=[] } = this.context
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || { content: '' }
-    //console.log(note.id)
     return(
         <section className='NotePageMain'>
         <Note
@@ -47,7 +39,7 @@ export default class NotePageMain extends React.Component {
         <button
           className='Note__edit'
           type='button'
-          onClick={() => this.handleButtonClick(note.id)}
+          onClick={() => this.handleButtonClick(noteId)}
         >
           <Link to={`/edit-note`}>
             <FontAwesomeIcon 

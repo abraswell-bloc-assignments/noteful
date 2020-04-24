@@ -73,15 +73,21 @@ class App extends Component {
       })
   }
 
-  handleEditNote = noteId => {
-    this.setState({
-      editNoteId: noteId
-    })
+  handleAddNote = note => {
+    this.setState({ notes: [...this.state.notes, note] }, () =>
+      this.props.history.replace('/')
+    )
   }
 
   handleDeleteNote = noteId => {
     this.setState({
         notes: this.state.notes.filter(note => note.id !== noteId)
+    })
+  }
+
+  handleEditNote = noteId => {
+    this.setState({
+      editNoteId: noteId
     })
   }
 
@@ -94,11 +100,6 @@ class App extends Component {
     )
   }
 
-  handleAddNote = note => {
-    this.setState({ notes: [...this.state.notes, note] }, () =>
-      this.props.history.replace('/')
-    )
-  }
 
   renderNavRoutes() {
     const { notes, folders } = this.state
@@ -162,8 +163,8 @@ class App extends Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          //editNote: this.handleEditNote,
           deleteNote: this.handleDeleteNote,
+          editNote: this.handleEditNote,
           handleAddNote: this.handleAddNote,
           handleAddFolder: this.handleAddFolder,
           handleEditNote: this.handleEditNote, 

@@ -10,7 +10,6 @@ export default class Note extends React.Component {
 
   static defaultProps ={
     onDeleteNote: () => {},
-    onEditNote: () => {},
   }
   static contextType = ApiContext
 
@@ -23,7 +22,6 @@ export default class Note extends React.Component {
         'Content-Type': 'application/json'
     }}
     const url = (`${config.API_ENDPOINT}/notes/${noteId}`)
-    console.log(url)
       fetch(url, options)
       .then(res => {
         if (!res.ok) {
