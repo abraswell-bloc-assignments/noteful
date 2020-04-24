@@ -102,7 +102,6 @@ export default class EditNote extends Component {
   //     })
 
   handleClickEdit = (noteId) => {
-    this.updateNoteId()
     const options = {
       method: 'PATCH',
       headers: {
