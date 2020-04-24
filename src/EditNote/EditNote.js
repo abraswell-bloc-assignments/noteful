@@ -78,22 +78,8 @@ export default class EditNote extends Component {
     this.setState({ folderid: folderid })
   }
 
-  componentDidMount(){
-    console.log(this.context.editNoteId)
-    this.updateNoteId()
-  }
 
-  updateNoteId = () => {
-    const noteId = (this.context.editNoteId)
-
-    this.setState({
-          editNoteId: noteId
-          })
-    console.log(noteId)
-    console.log(this.state.editNoteId)
-  }
-
-    // isNameValid = (e) => {
+  // isNameValid = (e) => {
   //   e.preventDefault()
   //   if (!this.state.name) {
   //     this.setState({
@@ -113,14 +99,14 @@ export default class EditNote extends Component {
         folderid: this.state.folderid
       })
     }
-    const url = (`${config.API_ENDPOINT}/notes/edit-note/${noteId}`)
-    console.log(url)
+    const url = (`${config.API_ENDPOINT}/notes/edit-note/${this.context.editNoteId}`)
+    console.log("url:", url)
+    debugger
     fetch(url, options)
       .then(res => {
         if (!res.ok){
           throw new Error('Something went wrong')
         }
-        alert(url)
         return res.json()
       })
       .then(() => {
