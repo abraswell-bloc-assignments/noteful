@@ -10,15 +10,13 @@ export default class EditNote extends Component {
     super()
     this.state = {
       error: null,
-      name: '',
-      id: '',
       editNoteId: '',
-      content: '',
-      folderid: '',
-      nameValid: false,
-      folderIdValid: false,
-      validationNameMessage: '',
-      validationFolderIdMessage: ''
+      id: '',
+      name: this.context.name,
+      content: this.context.content,
+      folderid: this.context.folderid,
+      validationRequestMessage: '',
+      requestValid: false
     }
   }
   static contextType = ApiContext
@@ -26,48 +24,27 @@ export default class EditNote extends Component {
   static defaultProps = {
     folders: []
   }
-  
 
-  // isNameValid = (e) => {
+  // isRequestValid = (e, noteId) => {
   //   e.preventDefault()
-  //   if (!this.state.name) {
+  //   if ((!this.state.name) && (!this.state.content) && (!this.state.folderId)) {
   //     this.setState({
-  //       validationNameMessage: 'Please enter a name',
-  //       nameValid: false
+  //       validationRequestMessage: 'Please update either name, content, or folder',
+  //       requestValid: false
   //     })
   //   } else {
   //     this.setState(
   //       {
-  //         validationNameMessage: '',
-  //         nameValid: true
-  //       },
-  //     )
-  //   }
-  // }
-
-
-  // isFolderIdValid = (e) => {
-  //   e.preventDefault()
-  //   if (!this.state.folderid) {
-  //     this.setState({
-  //       validationFolderIdMessage: 'You must choose a valid folder',
-  //       folderIdValid: false
-  //     })
-  //   } else {
-  //     this.setState(
-  //       {
-  //         validationFolderIdMessage: '',
-  //         nameValid: true
+  //         validationRequestMessage: '',
+  //         requestValid: true
   //       },
   //       () => {
-  //  // DON'T THINK THIS METHOD EXISTS - IS IT A REFERENCE TO CONTEXT - LOOK AT APP.JS
-  //         this.editNote()
+  //         this.handleClickEdit()
   //       }
   //     )
   //   }
   // }
-
-  
+    
   updateName = (name) => {
     this.setState({ name: name })
   }
@@ -86,7 +63,7 @@ export default class EditNote extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
+      body: JSON.stringify({                     
         name: this.state.name,
         content: this.state.content,
         folderid: this.state.folderid
@@ -94,7 +71,6 @@ export default class EditNote extends Component {
     }
     const url = (`${config.API_ENDPOINT}/notes/edit-note/${this.context.editNoteId}`)
     console.log("url:", url)
-    // debugger
     fetch(url, options)
       .then(res => {
         if (!res.ok){
@@ -118,17 +94,12 @@ export default class EditNote extends Component {
       <section className='EditNote'>
         <h2>Edit note</h2>
         <h3>Please edit at least one field</h3>
-        {!this.state.nameValid && (
+        {!this.state.requestValid && (
           <div>
-            <p className='error__message'>{this.state.validationNameMessage}</p>
+            <p className='error__message'>{this.state.validationRequestMessage}</p>
           </div>
         )}
 
-        {!this.state.idValid && (
-          <div>
-            <p className='error__message'>{this.state.validationIdMessage}</p>
-          </div>
-        )}
         <NotefulForm
           className='EditNote__Form'
         >
@@ -182,7 +153,7 @@ export default class EditNote extends Component {
         <div className='buttons'>
           <button type='submit'>
           <FontAwesomeIcon 
-            onClick={this.handleClickEdit}
+            onClick={this.handleClickEdit()}
             className='icon' 
             icon={['fa', 'edit']} 
           />
