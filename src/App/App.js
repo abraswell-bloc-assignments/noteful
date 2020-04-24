@@ -9,6 +9,7 @@ import config from '../config';
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
 import ApiContext from '../ApiContext'
+import EditNote from '../EditNote/EditNote'
 import NotefulError from '../NotefulError/NotefulError'
 import NoteListNav from '../NoteListNav/NoteListNav'
 import NotePageNav from '../NotePageNav/NotePageNav'
@@ -22,6 +23,7 @@ library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAl
 class App extends Component {
   state = {
     notes: [],
+    editNoteId: null,
     folders: [],
     err: null
   }
@@ -73,7 +75,7 @@ class App extends Component {
 
   handleEditNote = noteId => {
     this.setState({
-        notes: this.state.notes.filter(note => note.id !== noteId)
+      editNoteId: noteId
     })
   }
 
@@ -118,6 +120,7 @@ class App extends Component {
         {/* Other Routes */}
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-note' component={NotePageNav} />
+        <Route path='/edit-note' component={NotePageNav} />
       </>
     )
   }
@@ -149,6 +152,7 @@ class App extends Component {
         <Route path='/add-folder' component={AddFolder} />
         {/* Add Note Route */}
         <Route path='/add-note' component={AddNote} />
+        <Route path='/edit-note' component={EditNote} />
       </>
     )
   }
@@ -158,10 +162,12 @@ class App extends Component {
         value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          editNote: this.handleEditNote,
+          //editNote: this.handleEditNote,
           deleteNote: this.handleDeleteNote,
           handleAddNote: this.handleAddNote,
-          handleAddFolder: this.handleAddFolder
+          handleAddFolder: this.handleAddFolder,
+          handleEditNote: this.handleEditNote, 
+          editNoteId: this.state.editNoteId
         }}
       >
         <div className='App'>

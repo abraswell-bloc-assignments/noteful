@@ -41,30 +41,6 @@ export default class Note extends React.Component {
       })
   }
 
-  handleClickEdit = e => {
-    e.preventDefault()
-    const noteId = this.props.id
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      },
-    })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
-      .then(() => {
-        this.context.editNote(noteId)
-        // allow parent to perform extra behaviour
-        this.props.onEditNote(noteId)
-      })
-      .catch(error => {
-        console.error({ error })
-      })
-  }
-
   
   render() {
     const { name, id, modified} = this.props

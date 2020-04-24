@@ -12,32 +12,36 @@ exports[`NotePageMain component renders a .NotePageMain by default 1`] = `
     className="Note__edit"
     type="button"
   >
-    <FontAwesomeIcon
-      border={false}
-      className=""
-      fixedWidth={false}
-      flip={null}
-      icon={
-        Array [
-          "fa",
-          "edit",
-        ]
-      }
-      inverse={false}
-      listItem={false}
-      mask={null}
-      pull={null}
-      pulse={false}
-      rotation={null}
-      size={null}
-      spin={false}
-      swapOpacity={false}
-      symbol={false}
-      title=""
-      transform={null}
-    />
-     
-    remove
+    <Link
+      to="/edit-note"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fa",
+            "edit",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       
+      edit
+    </Link>
   </button>
   <div
     className="NotePageMain__content"

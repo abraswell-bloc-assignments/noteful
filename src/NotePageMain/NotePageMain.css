@@ -6,8 +6,17 @@
     width: 100%;
   }
   
-  .NotePageMain__content {
-    color: #3a3939;
-    max-width: 380px;
-  }
-  
+.NotePageMain__content {
+  color: #3a3939;
+  max-width: 380px;
+}
+
+#root > div > main > section > button {
+  background-color: #dddddd;
+  padding: 5px 15px;
+}
+
+#root > div > main > section > button > a{
+  text-decoration: none;
+  color:#0b1f3a;
+} 

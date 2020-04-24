@@ -1,18 +1,18 @@
-.AddNote__Form {
+.EditNote__Form {
     padding: 0;
     float: left;
     text-align: left;
     width: 40%;
   }
 
-.AddNote h2 {
+.EditNote h2 {
     margin: 130px 0 0;
     font-weight: 400;
     padding: 1vh 12px;
     color: #aaaaaa;
 }
 
-.AddNote_form-group input, textarea{
+.EditNote_form-group input, textarea{
     background-color: #030f1f;
     border: none;
     color: #b5b3b3; 
@@ -79,7 +79,7 @@ textarea {
     outline: none;
 }
 
-.AddNote__add-note-button{
+.EditNote__edit-note-button{
 margin: 2vh auto;
 }
 
@@ -137,5 +137,7 @@ select {
     background-color: #29862e;
     cursor: pointer;
   }
+
+
 
 

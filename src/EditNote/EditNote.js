@@ -3,20 +3,21 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
-import './AddNote.css'
+import './EditNote.css'
 
-export default class AddNote extends Component {
+export default class EditNote extends Component {
   constructor() {
     super()
     this.state = {
       error: null,
       name: '',
-      content: '',
       id: '',
+      content: '',
+      folderId: '',
       nameValid: false,
-      idValid: false,
+      folderIdValid: false,
       validationNameMessage: '',
-      validationIdMessage: ''
+      validationFolderIdMessage: ''
     }
   }
   static contextType = ApiContext
@@ -25,89 +26,89 @@ export default class AddNote extends Component {
     folders: []
   }
 
-  isNameValid = (e) => {
-    e.preventDefault()
-    if (!this.state.name) {
-      this.setState({
-        validationNameMessage: 'Please enter a name',
-        nameValid: false
-      })
-    } else {
-      this.setState(
-        {
-          validationNameMessage: '',
-          nameValid: true
-        },
-      )
-    }
-  }
+  // isNameValid = (e) => {
+  //   e.preventDefault()
+  //   if (!this.state.name) {
+  //     this.setState({
+  //       validationNameMessage: 'Please enter a name',
+  //       nameValid: false
+  //     })
+  //   } else {
+  //     this.setState(
+  //       {
+  //         validationNameMessage: '',
+  //         nameValid: true
+  //       },
+  //     )
+  //   }
+  // }
 
-  isIdValid = (e) => {
-    e.preventDefault()
-    if (!this.state.id) {
-      this.setState({
-        validationIdMessage: 'You must choose a valid folder',
-        idValid: false
-      })
-    } else {
-      this.setState(
-        {
-          validationIdMessage: '',
-          nameValid: true
-        },
-        () => {
-          this.handleAddNote()
-        }
-      )
-    }
-  }
+  // isFolderIdValid = (e) => {
+  //   e.preventDefault()
+  //   if (!this.state.folderId) {
+  //     this.setState({
+  //       validationFolderIdMessage: 'You must choose a valid folder',
+  //       folderIdValid: false
+  //     })
+  //   } else {
+  //     this.setState(
+  //       {
+  //         validationFolderIdMessage: '',
+  //         nameValid: true
+  //       },
+  //       () => {
+  //         this.editNote()
+  //       }
+  //     )
+  //   }
+  // }
 
   
   updateName = (name) => {
     this.setState({ name: name })
+
   }
 
   updateContent = (content) => {
     this.setState({ content: content })
   }
 
-  idChange = (letter) => {
-    this.setState({ id: letter })
+  updateFolderId = (folderId) => {
+    this.setState({ folderId: folderId })
   }
 
-  handleAddNote = () => {
+  handleClickEdit = () => {
+    const noteId = this.context.notes
     const options = {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        modified: new Date(),
-        folderid: this.state.id,
-        content: this.state.content
-      })
-    }
-
-    fetch(`${config.API_ENDPOINT}/notes/add-note`, options)
+    }}
+    const url = (`${config.API_ENDPOINT}/notes/edit-note/${noteId}`)
+    console.log(noteId)
+    fetch(url, options)
       .then(res => {
-        if (!res.ok) {
+        if (!res.ok){
           throw new Error('Something went wrong')
         }
         return res.json()
       })
-      .then(data => {
-        this.context.handleAddNote(data)
+      .then(() => {
+        this.context.editNote(noteId)
+        // allow parent to perform extra behaviour
+        this.props.onEditNote(noteId)
       })
-      .catch(err => {
-        this.setState({ error: err.message })
+      .catch(error => {
+        console.error({ error })
       })
   }
 
+
   render() {
+  console.log(this.context)
     return (
-      <section className='AddNote'>
-        <h2>Create a note</h2>
+      <section className='EditNote'>
+        <h2>Edit note</h2>
         {!this.state.nameValid && (
           <div>
             <p className='error__message'>{this.state.validationNameMessage}</p>
@@ -120,11 +121,10 @@ export default class AddNote extends Component {
           </div>
         )}
         <NotefulForm
-          className='AddNote__Form'
-          onSubmit={event => {
-            this.isNameValid(event)
-            this.isIdValid(event)
-          }}
+          className='EditNote__Form'
+          // onSubmit={event => {
+          //   this.handleClickEdit(event)
+          // }}
         >
           
         <div className='field form-group'>
@@ -178,9 +178,13 @@ export default class AddNote extends Component {
 
         <div className='buttons'>
           <button type='submit'>
-          <FontAwesomeIcon icon={['fa', 'plus']} />
+          <FontAwesomeIcon 
+            onClick={this.handleClickEdit}
+            className='icon' 
+            icon={['fa', 'edit']} 
+          />
             <br />
-            Note
+            Edit
 
           </button>
         </div>
