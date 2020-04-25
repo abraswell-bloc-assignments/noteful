@@ -12,9 +12,9 @@ export default class EditNote extends Component {
       error: null,
       editNoteId: '',
       id: '',
-      name: this.context.name,
-      content: this.context.content,
-      folderid: this.context.folderid,
+      name: '',
+      content: '',
+      folderid: '',
       validationRequestMessage: '',
       requestValid: false
     }
@@ -25,25 +25,26 @@ export default class EditNote extends Component {
     folders: []
   }
 
-  // isRequestValid = (e, noteId) => {
-  //   e.preventDefault()
-  //   if ((!this.state.name) && (!this.state.content) && (!this.state.folderId)) {
-  //     this.setState({
-  //       validationRequestMessage: 'Please update either name, content, or folder',
-  //       requestValid: false
-  //     })
-  //   } else {
-  //     this.setState(
-  //       {
-  //         validationRequestMessage: '',
-  //         requestValid: true
-  //       },
-  //       () => {
-  //         this.handleClickEdit()
-  //       }
-  //     )
-  //   }
-  // }
+
+  isRequestValid = (e) => {
+    e.preventDefault()
+    if ((!this.state.name) && (!this.state.content) && (!this.state.folderId)) {
+      this.setState({
+        validationRequestMessage: 'Please update either name, content, or folder',
+        requestValid: false
+      })
+    } else {
+      this.setState(
+        {
+          validationRequestMessage: '',
+          requestValid: true
+        },
+        () => {
+          this.handleClickEdit()
+        }
+      )
+    }
+  }
     
   updateName = (name) => {
     this.setState({ name: name })
@@ -57,31 +58,39 @@ export default class EditNote extends Component {
     this.setState({ folderid: folderid })
   }
 
-  handleClickEdit = (noteId) => {
+  resetFields = (newFields) => {
+    this.setState({
+      name: newFields.id || '',
+      content: newFields.content || '',
+      folderid: newFields.content || '',
+    })
+  }
+
+  handleClickEdit = (e) => {
+    const { content, folderid, name } = this.state
+    const editedNote = {content, folderid, name}
     const options = {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({                     
-        name: this.state.name,
-        content: this.state.content,
-        folderid: this.state.folderid
-      })
+      body: JSON.stringify(editedNote)
     }
     const url = (`${config.API_ENDPOINT}/notes/edit-note/${this.context.editNoteId}`)
     console.log("url:", url)
     fetch(url, options)
       .then(res => {
         if (!res.ok){
-          throw new Error('Something went wrong')
+          return res.json().then(error => Promise.reject(error))
         }
         return res.json()
       })
       .then(() => {
-        this.context.handleEditNote(noteId)
+        this.resetFields(editedNote)
+        this.context.handleEditNote(editedNote)
         // allow parent to perform extra behaviour
-        this.props.handleEditNote(noteId)
+        this.props.handleEditNote(editedNote)
+        this.props.history.push('/')
       })
       .catch(error => {
         console.error({ error })
