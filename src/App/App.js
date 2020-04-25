@@ -5,20 +5,17 @@ import {
   faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble,faPencilAlt,} 
   from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import config from '../config';
 import AddFolder from '../AddFolder/AddFolder'
-import AddNote from '../AddNote/AddNote'
 import ApiContext from '../ApiContext'
-// import EditNote from '../EditNote/EditNote'
-import NotefulError from '../NotefulError/NotefulError'
-import NoteListNav from '../NoteListNav/NoteListNav'
-import NotePageNav from '../NotePageNav/NotePageNav'
-import NoteListMain from '../NoteListMain/NoteListMain'
-import NotePageMain from '../NotePageMain/NotePageMain'
+import AddNote from '../AddNote/AddNote'
+import config from '../config';
 import { findNote, findFolder } from '../notes-helpers'
+import NotefulError from '../NotefulError/NotefulError'
+import NoteListMain from '../NoteListMain/NoteListMain'
+import NoteListNav from '../NoteListNav/NoteListNav'
+import NotePageMain from '../NotePageMain/NotePageMain'
+import NotePageNav from '../NotePageNav/NotePageNav'
 import './App.css'
-
-//THIS VERSION HAS PATCH REQUEST EDITED OUT
 
 
 library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAlt)
@@ -98,18 +95,6 @@ class App extends Component {
     })
   }
 
-  // handleEditNote = noteId => {
-  //   this.setState({
-  //     editNoteId: noteId
-  //   })
-  // }
-
-  // isRequestValid = noteId => {
-  //   this.setState({
-  //     editNoteId: noteId
-  //   })
-  // }
-
   renderNavRoutes() {
     const { notes, folders } = this.state
     return (
@@ -127,10 +112,9 @@ class App extends Component {
             return <NotePageNav {...routeProps} folder={folder} />
           }}
         />
-        {/* Other Routes (Back Button) */}
+        {/* Other Routes -- Back Button */}
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-note' component={NotePageNav} />
-        {/* <Route path='/edit-note' component={NotePageNav} /> */}
       </>
     )
   }
@@ -160,8 +144,6 @@ class App extends Component {
         <Route path='/add-folder' component={AddFolder} />
         {/* Add-Note Route */}
         <Route path='/add-note' component={AddNote} />
-        {/* Edit-Note Route */}
-        {/* <Route path='/edit-note' component={EditNote} /> */}
       </>
     )
   }
@@ -174,10 +156,6 @@ class App extends Component {
           handleAddFolder: this.handleAddFolder,
           handleAddNote: this.handleAddNote,
           handleDeleteNote: this.handleDeleteNote
-          // handleDeleteNote: this.handleDeleteNote,
-          // handleEditNote: this.handleEditNote,
-          // isRequestValid: this.isRequestValid, 
-          // editNoteId: this.state.editNoteId
         }}
       >
         <div className='App'>

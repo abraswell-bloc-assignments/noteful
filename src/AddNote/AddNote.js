@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import NotefulForm from '../NotefulForm/NotefulForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
+import NotefulForm from '../NotefulForm/NotefulForm'
 import './AddNote.css'
 
 export default class AddNote extends Component {

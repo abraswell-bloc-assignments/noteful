@@ -1,9 +1,7 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Note from '../Note/Note'
 import ApiContext from '../ApiContext'
 import { findNote } from '../notes-helpers'
+import Note from '../Note/Note'
 import './NotePageMain.css'
 
 export default class NotePageMain extends React.Component {
@@ -18,10 +16,6 @@ export default class NotePageMain extends React.Component {
     this.props.history.push(`/`)
   }
 
-  // isRequestValid = (noteId) => {
-  //   this.context.isRequestValid(noteId)
-  // }
-
   render(){
     const { notes=[] } = this.context
     const { noteId } = this.props.match.params
@@ -34,20 +28,6 @@ export default class NotePageMain extends React.Component {
           modified={note.modified}
           onDeleteNote={this.handleDeleteNote}
         />
-
-        {/* <button
-          className='Note__edit'
-          type='button'
-          onClick={() => this.isRequestValid(noteId)}
-        >
-          <Link to={`/edit-note`}>
-            <FontAwesomeIcon 
-              icon={['fa', 'edit']}
-            />
-            {' '}
-            edit
-          </Link>
-        </button> */}
 
         <div className='NotePageMain__content'>
           {note.content.split(/\n \r|\n/).map((para, i) =>

@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Note from '../Note/Note'
-import CircleButton from '../CircleButton/CircleButton'
+import { Link } from 'react-router-dom'
 import ApiContext from '../ApiContext'
+import CircleButton from '../CircleButton/CircleButton'
+import Note from '../Note/Note'
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
 

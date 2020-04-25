@@ -6,7 +6,4 @@ export default React.createContext({
     addFolder: () => {},
     addNote: () => {},
     deleteNote: () => {}
-    // deleteNote: () => {},
-    // checkEditRequest: () => {},
-    // editNote: () => {}
 })
