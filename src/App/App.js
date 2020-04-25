@@ -18,6 +18,9 @@ import NotePageMain from '../NotePageMain/NotePageMain'
 import { findNote, findFolder } from '../notes-helpers'
 import './App.css'
 
+//THIS VERSION HAS PATCH REQUEST EDITED OUT
+
+
 library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAlt)
 
 class App extends Component {
