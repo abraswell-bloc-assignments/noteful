@@ -1,0 +1,61 @@
+
+.Post {
+    --post-height: 88px;
+    background-color: #010d1e;
+    color: #cacaca;
+    height: var(--post-height);
+    margin-bottom: 8px;
+    max-width: 380px;
+    padding: 8px 0 8px 8px;
+    position: relative;
+  }
+  
+  .Post__delete {
+    --post-button-height: 32px;
+    background-color: #041a3a;
+    border: 0;
+    color: #bdbcbc;
+    float: right;
+    font-size: 12px;
+    height: var(--post-button-height);
+    position: relative;
+    top: calc((var(--post-button-height) + 32px) * -1);
+    transform-origin: right bottom;
+    transform: rotate(-90deg);
+    width: calc(var(--post-height));
+  }
+  .Post__delete:hover {
+    background-color: #bd0909;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .Post__title {
+    font-family: var(--custom-font);
+    font-size: 20px;
+    margin: 0;
+    max-width: 80%;
+    min-height: 24px;
+  }
+  .Post__title a {
+    color: #cacaca;
+    display: block;
+    text-decoration: none;
+  }
+  .Post__title a:hover {
+    color: #FFB72F;
+  }
+
+  p.Content {
+    bottom: 15px;
+    position: absolute;
+  }
+  
+  .Post__dates {
+    bottom: 8px;
+    color: #a7a5a5;
+    font-size: 14px;
+    position: absolute;
+  }
+  

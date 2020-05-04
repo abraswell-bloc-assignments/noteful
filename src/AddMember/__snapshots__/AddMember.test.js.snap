@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddItemForm component renders the complete form 1`] = `
+<section
+  className="AddMember"
+>
+  <h3>
+    Create a member
+  </h3>
+  <div>
+    <p
+      className="error__message"
+    >
+      
+    </p>
+  </div>
+  <form
+    action="#"
+    className="Connectivity-form "
+    onSubmit={[Function]}
+  >
+    <div
+      className="form AddMember_form-group"
+    >
+      <div
+        className="field form-group"
+      >
+        <label
+          htmlFor="member-name"
+        >
+          <input
+            aria-required="true"
+            className="new__member__name"
+            name="member"
+            onChange={[Function]}
+            type="text"
+          />
+        </label>
+      </div>
+      <div
+        className="buttons"
+      >
+        <button
+          type="submit"
+        >
+          <br />
+          Member
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+`;

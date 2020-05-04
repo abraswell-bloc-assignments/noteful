@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectivityForm component renders a form.ConnectivityForm by default 1`] = `
+<form
+  action="#"
+  className="Connectivity-form "
+/>
+`;
+
+exports[`ConnectivityForm component renders the ConnectivityForm given props 1`] = `
+<form
+  action="#"
+  className="Connectivity-form test-class-name"
+  data-other="test-other-prop"
+>
+  <p>
+    test children
+  </p>
+</form>
+`;

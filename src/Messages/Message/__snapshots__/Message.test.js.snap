@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message component renders a .Message by default 1`] = `""`;
+
+exports[`Message component renders the Message given props 1`] = `""`;

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessagePageMain component renders a .MessagePageMain by default 1`] = `
+<section
+  className="MessagePageMain"
+>
+  <NavCircleButton
+    className="PostPageNav__back-button"
+    onClick={[Function]}
+    role="link"
+    tag="button"
+  >
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Array [
+          "fa",
+          "chevron-left",
+        ]
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      swapOpacity={false}
+      symbol={false}
+      title=""
+      transform={null}
+    />
+    <br />
+    Back
+  </NavCircleButton>
+  <Message
+    onDeleteMessage={[Function]}
+  />
+  <div
+    className="MessagePageMain__content"
+  >
+    <p
+      key="0"
+    />
+  </div>
+</section>
+`;

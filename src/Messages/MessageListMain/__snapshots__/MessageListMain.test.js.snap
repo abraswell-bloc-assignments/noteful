@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageListMain component renders a .MessageListMain by default 1`] = `
+<main
+  className="PostListMain"
+>
+  <ul />
+  <div
+    className="MessageListMain__button-container"
+  >
+    <NavCircleButton
+      className="MessageListMain__add-message-button"
+      tag={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "displayName": "Link",
+          "propTypes": Object {
+            "innerRef": [Function],
+            "onClick": [Function],
+            "replace": [Function],
+            "target": [Function],
+            "to": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      to="/add-message"
+      type="button"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fa",
+            "plus",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+      <br />
+      Message
+    </NavCircleButton>
+  </div>
+</main>
+`;

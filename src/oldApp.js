@@ -5,27 +5,16 @@ import {
   faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble,faPencilAlt,} 
   from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AddUser from '../AddUser/AddUser'
 import ApiContext from '../ApiContext'
-import config from '../config'
-import ConnectivityError from '../ConnectivityError/ConnectivityError'
-
-import AddMessage from '../AddMessage/AddMessage'
 import AddPost from '../AddPost/AddPost'
-
-import AddMember from '../AddMember/AddMember'
-
-import { findMessage, findMessageMember } from '../messages-helpers'
-import { findPost, findPostMember } from '../posts-helpers'
-
-import MessageListMain from '../Messages/MessageListMain/MessageListMain'
-//import MessageListNav from '../MessageListNav/MessageListNav'
-import MessagePageMain from '../Messages/MessagePageMain/MessagePageMain'
-//import MessagePageNav from '../MessagePageNav/MessagePageNav/MessagePageNav'
-
-import PostListMain from '../Posts/PostListMain/PostListMain'
-import PostListNav from '../Posts/PostListNav/PostListNav'
-import PostPageMain from '../Posts/PostPageMain/PostPageMain'
-import PostPageNav from '../Posts/PostPageNav/PostPageNav'
+import config from '../config';
+import { findPost, findUser } from '../posts-helpers'
+import ConnectivityError from '../ConnectivityError/ConnectivityError'
+import PostListMain from '../PostListMain/PostListMain'
+import PostListNav from '../PostListNav/PostListNav'
+import PostPageMain from '../PostPageMain/PostPageMain'
+import PostPageNav from '../PostPageNav/PostPageNav'
 import './App.css'
 
 
@@ -33,19 +22,17 @@ library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAl
 
 class App extends Component {
   state = {
-    editMessageId: null,
     posts: [],
     editPostId: null,
-    members: [],
+    users: [],
     err: null
   }
 
-  MemberUrl = `${config.API_ENDPOINT}/members`
+  UserUrl = `${config.API_ENDPOINT}/users`
   PostUrl = `${config.API_ENDPOINT}/posts`
-  MessageUrl = `${config.API_ENDPOINT}/messages`
 
   componentDidMount() {
-    fetch(this.MemberUrl)
+    fetch(this.UserUrl)
       .then(res => {
         if (!res.ok) {
           throw new Error('Something went wrong, please try again later.')
@@ -55,7 +42,7 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({
-          members: data,
+          users: data,
           error: null
         })
       })
@@ -85,47 +72,15 @@ class App extends Component {
           error: err.message
         })
       })
-
-      fetch(this.MessageUrl)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Something went wrong, please try again later.')
-        }
-        return res
-      })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          messages: data,
-          error: null
-        })
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
-        })
-      })
   }
 
-  handleAddMember = member => {
+  handleAddUser = user => {
     this.setState(
       {
-        members: [...this.state.members, member]
+        users: [...this.state.users, user]
       },
       () => this.props.history.replace('/')
     )
-  }
-
-  handleAddMessage = message => {
-    this.setState({ messages: [...this.state.messages, message] }, () =>
-      this.props.history.replace('/')
-    )
-  }
-
-  handleDeleteMessage = messageId => {
-    this.setState({
-        messages: this.state.messages.filter(message => message.id !== messageId)
-    })
   }
 
   handleAddPost = post => {
@@ -141,11 +96,11 @@ class App extends Component {
   }
 
   renderNavRoutes() {
-    const { messages, posts, members } = this.state
+    const { posts, users } = this.state
     return (
       <>
         {/* Main Route */}
-        {['/', '/members/:memberid', '/messages'].map(path => (
+        {['/', '/users/:userid'].map(path => (
           <Route exact key={path} path={path} component={PostListNav} />
         ))}
         <Route
@@ -153,23 +108,13 @@ class App extends Component {
           render={routeProps => {
             const { postId } = routeProps.match.params
             const post = findPost(posts, postId) || {}
-            const member = findPostMember(members, post.memberid)
-            return <PostPageNav {...routeProps} member={member} />
-          }}
-        />
-        <Route
-          path='/messages/:messageId'
-          render={routeProps => {
-            const { messageId } = routeProps.match.params
-            const message = findMessage(messages, messageId) || {}
-            const member = findMessageMember(members, message.memberid)
-            return <PostPageNav {...routeProps} member={member} />
+            const user = findUser(users, post.userid)
+            return <PostPageNav {...routeProps} user={user} />
           }}
         />
         {/* Other Routes -- Back Button */}
-        <Route path='/add-member' component={PostPageNav} />
+        <Route path='/add-user' component={PostPageNav} />
         <Route path='/add-post' component={PostPageNav} />
-        <Route path='/add-message' component={PostPageNav} />
       </>
     )
   }
@@ -178,7 +123,7 @@ class App extends Component {
     return (
       <>
         {/* Main Route */}
-        {['/', '/members/:memberid'].map(path => (
+        {['/', '/users/:userid'].map(path => (
           <Route
             exact
             key={path}
@@ -195,24 +140,8 @@ class App extends Component {
             return <PostPageMain {...routeProps} />
           }}
         />
-        {/* Message Route */}
-        <Route
-          exact
-          path='/messages'
-          render={routeProps => {
-            return <MessageListMain {...routeProps} />
-          }}
-        />
-        <Route
-          path='/messages/:messageId'
-          render={routeProps => {
-            return <MessagePageMain {...routeProps} />
-          }}
-        />
-        {/* Add-Member Route */}
-        <Route path='/add-member' component={AddMember} />
-        {/* Add-Message Route */}
-        <Route path='/add-message' component={AddMessage} />
+        {/* Add-User Route */}
+        <Route path='/add-user' component={AddUser} />
         {/* Add-Post Route */}
         <Route path='/add-post' component={AddPost} />
       </>
@@ -222,14 +151,11 @@ class App extends Component {
     return (
       <ApiContext.Provider
         value={{
-          members: this.state.members,
-          messages: this.state.messages,
+          users: this.state.users,
           posts: this.state.posts,
-          handleAddMember: this.handleAddMember,
-          handleAddMessage: this.handleAddMessage,
-          handleDeleteMessage: this.handleDeleteMessage,
+          handleAddUser: this.handleAddUser,
           handleAddPost: this.handleAddPost,
-          handleDeletePost: this.handleDeletePost,
+          handleDeletePost: this.handleDeletePost
         }}
       >
         <div className='App'>
