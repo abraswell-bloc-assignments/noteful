@@ -4,7 +4,7 @@ export const findMessageMember = (members=[], memberid) =>
 export const findMessage = (messages=[], messageId) =>
   messages.find(message => message.id === messageId)
 
-export const getMessagesForMember = (messages=[], memberid) => (
+export const getMessagesFromMember = (messages=[], memberid) => (
   (!memberid)
     ? messages
     : messages.filter(message => message.memberid === memberid)

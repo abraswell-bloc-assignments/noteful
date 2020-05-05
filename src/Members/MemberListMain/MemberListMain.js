@@ -21,19 +21,39 @@ export default class MemberListMain extends React.Component {
         const { members = [] } = this.context
         return(
             <section className='MemberListMain'>
+
+                
+                
                 <h2 className='PageTitle'>Group Members</h2>
-                <ul>
-                    {members.map(member =>  
-                        <li key={member.id}>
-                        <Member
-                            id={member.id}
-                            nickname={member.nickname}
-                            city={member.city}
-                            state={member.state}
-                        />
-                        </li>
-                    )}
-                </ul>
+
+                        <div className='member-page-flexbox-container'>
+                            {members.map(member =>  
+                                <div key={member.id} className='member-flexbox-container'>
+                                        <div className='member__img'>
+                                            <Link to={`/members/${member.id}`}>
+                                                <img 
+                                                    src={require(`../../Images/User_${member.id}.jpg`)} 
+                                                    alt='member headshot'
+                                                    width='250px'
+                                                >
+                                                </img>
+                                            </Link>      
+                                        </div>    
+
+
+                                        <div className='member__info'>
+                                            <Member
+                                                id={member.id}
+                                                nickname={member.nickname}
+                                                city={member.city}
+                                                state={member.state}
+                                            />
+                                        </div>
+                                </div>
+                            )}
+                        </div>
+ 
+
                 <div className='Main__button-container'>
                 <ConnectivityButton 
                     tag={Link}

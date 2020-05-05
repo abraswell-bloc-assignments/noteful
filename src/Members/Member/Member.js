@@ -19,7 +19,7 @@ export default class Member extends React.Component {
     } 
 
     return (
-      <div className='Item__in__list'>
+      <div>
         <h2 className='Member__title'>
           <Link to={`/members/${id}`}>
             {nickname}

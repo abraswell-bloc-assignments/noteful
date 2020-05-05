@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import ApiContext from '../../ApiContext'
 import ConnectivityButton from '../../ConnectivityButton/ConnectivityButton'
 import Post from '../Post/Post'
-import { getPostsForMember } from '../posts-helpers'
+import { getPostsFromMember } from '../posts-helpers'
 
 
 export default class PostListMain extends React.Component {
@@ -19,12 +19,12 @@ export default class PostListMain extends React.Component {
   render() {
     const { memberid } = this.props.match.params
     const { posts=[] } = this.context
-    const postsForMember = getPostsForMember(posts, memberid)
+    const postsFromMember = getPostsFromMember(posts, memberid)
     return (
       <section className='PostListMain'>
         <h2 className='PageTitle'>Public Posts</h2>
         <ul>
-          {postsForMember.map(post =>
+          {postsFromMember.map(post =>
             <li key={post.id}>
               <Post
                 id={post.id}

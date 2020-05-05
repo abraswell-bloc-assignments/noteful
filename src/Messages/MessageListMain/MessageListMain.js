@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import ApiContext from '../../ApiContext'
 import ConnectivityButton from '../../ConnectivityButton/ConnectivityButton'
 import Message from '../Message/Message'
-import { getMessagesForMember } from '../messages-helpers'
+import { getMessagesFromMember } from '../messages-helpers'
 
 
 export default class PostListMain extends React.Component {
@@ -19,7 +19,7 @@ export default class PostListMain extends React.Component {
   render() {
     const { memberid } = this.props.match.params
     const { messages=[] } = this.context
-    const messagesForMember = getMessagesForMember(messages, memberid)
+    const messagesForMember = getMessagesFromMember(messages, memberid)
     return (
       <section className='PostListMain'>
         <h2 className='PageTitle'>Private Messages</h2>

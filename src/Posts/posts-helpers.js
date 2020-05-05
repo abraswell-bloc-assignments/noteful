@@ -4,7 +4,7 @@ export const findPostMember = (members=[], memberid) =>
 export const findPost = (posts=[], postId) =>
   posts.find(post => post.id === postId)
 
-export const getPostsForMember = (posts=[], memberid) => (
+export const getPostsFromMember = (posts=[], memberid) => (
   (!memberid)
     ? posts
     : posts.filter(post => post.memberid === memberid)

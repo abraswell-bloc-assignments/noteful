@@ -120,13 +120,26 @@ a.buttons button {
   }
 
   .ItemPageMain {
-    background-color: #efefef;
-    border: 1px solid #111; 
+    background-color: #efefef; 
     padding: 10px;
-    margin: 0 33% 8px 10.5%;
+    margin: 0 33% 10vh 10.5%;
     width: 57.5%;
     position: relative;
     top: 8vh;
+  }
+
+  .ItemPageMain__content {
+    padding: 10px;
+    border: 1px solid #111;
+  }
+
+  .SectionTitle {
+    font-size: 1.5em;
+    font-weight: 400;
+    text-align: center;
+    width: 60%;
+    margin: 4vh 30.5% 8px 9.5%;
+
   }
   
   .Item__title {
@@ -154,6 +167,68 @@ a.buttons button {
     color: #111;
     font-size: 14px;
   }
+
+  /**************** Member Page ***************/
+
+  .MemberListMain__flex {
+    display: flex;
+  }
+
+  .Member__activity {
+    width: 80%;
+    margin: 0 13% 0 7%;
+  }
+
+  .Member__num-posts {
+    color: #111;
+    font-size: 16px;
+  }
+
+  .Member__num-messages {
+    color: #111;
+    font-size: 16px;
+  }
+
+  .member-page-flexbox-container {
+    width: 70%;
+    margin: 0 24% 0 6%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .member-flexbox-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    margin-top: 5vh;
+  }
+
+  .member-flexbox-container:last-child {
+    margin-right: 50%;
+  }
+
+  .member__img {
+    width: 80%;
+    text-align: center;
+  }
+
+  .member__info {
+    width: 80%;
+    position: relative;
+    text-align: center;
+  }
+
+  
+
+
+
+
+
+  
 
 
   
