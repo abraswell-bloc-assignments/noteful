@@ -2,10 +2,10 @@
 
 exports[`PostPageMain component renders a .PostPageMain by default 1`] = `
 <section
-  className="PostPageMain"
+  className="ItemPageMain"
 >
-  <NavCircleButton
-    className="PostPageNav__back-button"
+  <NavConnectivityButton
+    className="Nav__back-button"
     onClick={[Function]}
     role="link"
     tag="button"
@@ -36,16 +36,67 @@ exports[`PostPageMain component renders a .PostPageMain by default 1`] = `
     />
     <br />
     Back
-  </NavCircleButton>
-  <Post
-    onDeletePost={[Function]}
-  />
+  </NavConnectivityButton>
   <div
-    className="PostPageMain__content"
+    className="ItemPageMain__content"
   >
-    <p
-      key="0"
-    />
+    <p>
+      Member:
+       
+    </p>
+    <div
+      className="ItemPageMain__content"
+    >
+      <p
+        key="0"
+      >
+        Content:
+         
+      </p>
+    </div>
+    <p>
+      Like Count:
+       
+    </p>
+    <p>
+      Comment Count:
+       
+    </p>
+    <p>
+      Posted:
+       
+    </p>
+    <button
+      className="Item__delete"
+      type="button"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fa",
+            "trash-alt",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       
+      remove
+    </button>
   </div>
 </section>
 `;

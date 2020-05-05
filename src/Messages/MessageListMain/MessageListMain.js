@@ -2,10 +2,10 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import ApiContext from '../../ApiContext'
-import CircleButton from '../../CircleButton/CircleButton'
+import ConnectivityButton from '../../ConnectivityButton/ConnectivityButton'
 import Message from '../Message/Message'
-import { getMessagesForMember } from '../../messages-helpers'
-import './MessageListMain.css'
+import { getMessagesForMember } from '../messages-helpers'
+
 
 export default class PostListMain extends React.Component {
   static defaultProps = {
@@ -21,32 +21,35 @@ export default class PostListMain extends React.Component {
     const { messages=[] } = this.context
     const messagesForMember = getMessagesForMember(messages, memberid)
     return (
-      <main className='PostListMain'>
+      <section className='PostListMain'>
+        <h2 className='PageTitle'>Private Messages</h2>
         <ul>
           {messagesForMember.map(message =>
             <li key={message.id}>
               <Message
                 id={message.id}
                 content={message.content}
-                name={message.name}
+                nickname={message.nickname}
                 modified={message.modified}
               />
             </li>
           )}
         </ul>
-        <div className='MessageListMain__button-container'>
-          <CircleButton 
+        <div className='Main__button-container'>
+          <ConnectivityButton 
             tag={Link}
             to='/add-message'
             type='button'
-            className='MessageListMain__add-message-button'
+            className='Main__add-button'
           >
             <FontAwesomeIcon icon={['fa', 'plus']} />
             <br />
+            New
+            <br />
             Message
-          </CircleButton>
+          </ConnectivityButton>
         </div>
-      </main>
+      </section>
     )
   }
 }
@@ -56,46 +59,3 @@ export default class PostListMain extends React.Component {
 
 
 
-// export default class MessageListMain extends React.Component {
-//   static defaultProps = {
-//     match: {
-//       params: {}
-//     }
-//   }
-//   static contextType = ApiContext
-
-  
-//   render() {
-//     const { memberid } = this.props.match.params
-//     const { messages=[] } = this.context
-//     const messagesForMember = getMessagesForMember(messages, memberid)
-//     return (
-//       <main className='MessageListMain'>
-//         <ul>
-//           {messagesForMember.map(message =>
-//             <li key={message.id}>
-//               <Message
-//                 id={message.id}
-//                 content={message.content}
-//                 name={message.name}
-//                 modified={message.modified}
-//               />
-//             </li>
-//           )}
-//         </ul>
-//         <div className='MessageListMain__button-container'>
-//           <CircleButton 
-//             tag={Link}
-//             to='/add-message'
-//             type='button'
-//             className='MessageListMain__add-message-button'
-//           >
-//             <FontAwesomeIcon icon={['fa', 'plus']} />
-//             <br />
-//             Message
-//           </CircleButton>
-//         </div>
-//       </main>
-//     )
-//   }
-// }

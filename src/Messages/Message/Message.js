@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { format } from 'date-fns'
 import ApiContext from '../../ApiContext'
 import config from '../../config'
-import './Message.css'
 
 export default class Message extends React.Component {
 
@@ -41,20 +40,23 @@ export default class Message extends React.Component {
 
   
   render() {
-    const {name, id, modified} = this.props
-    if (!name || !id || !modified) {
+    const {content, nickname, id, modified} = this.props
+    if (!content || !nickname || !id || !modified) {
       return null
     } 
-    const formatDate = format(new Date(modified), 'hh:mm a / MMMM do yyyy')
+    const formatDate = format(new Date(modified), 'hh:mm a MMMM do, yyyy')
     return (
-      <div className='Message'>
-        <h2 className='Message__title'>
+      <div className='Item__in__list'>
+        <h2 className='Item__title'>
           <Link to={`/messages/${id}`}>
-            {name}
+            Message From: {nickname}
           </Link>
         </h2>
+        <p className='Item__content'>
+          {content}
+        </p>
         <button
-          className='Message__delete'
+          className='Item__delete'
           type='button'
           onClick={this.handleClickDelete}
         >
@@ -62,10 +64,8 @@ export default class Message extends React.Component {
           {' '}
           remove
         </button>
-        <div className='Message__dates'>
-          <div className='Message__dates-modified'>
-            Modified
-            {' '}
+        <div className='Item__dates'>
+          <div className='Item__dates-modified'>
             <span className='Date'>
             {formatDate}
             </span>

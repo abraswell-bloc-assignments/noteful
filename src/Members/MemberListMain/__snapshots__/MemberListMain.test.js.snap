@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostListMain component renders a .PostListMain by default 1`] = `
+exports[`MemberListMain component renders a .MemberListMain by default 1`] = `
 <section
-  className="PostListMain"
+  className="MemberListMain"
 >
   <h2
     className="PageTitle"
   >
-    Public Posts
+    Group Members
   </h2>
   <ul />
   <div
@@ -57,7 +57,7 @@ exports[`PostListMain component renders a .PostListMain by default 1`] = `
         transform={null}
       />
       <br />
-      Post
+      Invite Member
     </NavConnectivityButton>
   </div>
 </section>

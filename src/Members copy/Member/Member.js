@@ -4,24 +4,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { format } from 'date-fns'
 import ApiContext from '../../ApiContext'
 import config from '../../config'
+// import './Member.css'
 
-
-export default class Post extends React.Component {
+export default class Member extends React.Component {
 
   static defaultProps ={
-    onDeletePost: () => {},
+    onDeleteMember: () => {},
   }
   static contextType = ApiContext
 
 
   handleClickDelete = () => {
-    const postId = this.props.id
+    const memberId = this.props.id
     const options = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
     }}
-    const url = (`${config.API_ENDPOINT}/posts/${postId}`)
+    const url = (`${config.API_ENDPOINT}/members/${memberId}`)
       fetch(url, options)
       .then(res => {
         if (!res.ok) {
@@ -30,9 +30,9 @@ export default class Post extends React.Component {
         return res.json
       })
       .then(() => {
-        this.context.handleDeletePost(postId)
+        this.context.handleDeleteMember(memberId)
         // allow parent to perform extra behaviour
-        this.props.onDeletePost(postId)
+        this.props.onDeleteMember(memberId)
       })
       .catch(error => {
         console.error({ error })
@@ -41,23 +41,20 @@ export default class Post extends React.Component {
 
   
   render() {
-    const { content, nickname, id, modified} = this.props
-    if (!content || !nickname || !id || !modified) {
+    const { name, id, modified} = this.props
+    if (!name || !id || !modified) {
       return null
     } 
-    const formatDate = format(new Date(modified), 'hh:mm a MMMM do, yyyy')
+    const formatDate = format(new Date(modified), 'MMMM do yyyy')
     return (
-      <div className='Item__in__list'>
-        <h3 className='Item__title'>
-          <Link to={`/posts/${id}`}>
-            {nickname}
+      <div className='Member'>
+        <h2 className='Member__title'>
+          <Link to={`/members/${id}`}>
+            {name}
           </Link>
-        </h3>
-        <p className='Item__content'>
-          {content}
-        </p>
+        </h2>
         <button
-          className='Item__delete'
+          className='Member__delete'
           type='button'
           onClick={this.handleClickDelete}
         >
@@ -65,8 +62,10 @@ export default class Post extends React.Component {
           {' '}
           remove
         </button>
-        <div className='Item__dates'>
-          <div className='Item__dates-modified'>
+        <div className='Member__dates'>
+          <div className='Member__dates-modified'>
+            Modified
+            {' '}
             <span className='Date'>
             {formatDate}
             </span>

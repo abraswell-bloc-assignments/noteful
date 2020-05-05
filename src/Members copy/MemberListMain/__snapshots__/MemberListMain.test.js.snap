@@ -1,15 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostListMain component renders a .PostListMain by default 1`] = `
-<section
-  className="PostListMain"
+exports[`MemberListMain component renders a .MemberListMain by default 1`] = `
+<div
+  className="MemberListMain"
 >
-  <h2
-    className="PageTitle"
-  >
-    Public Posts
-  </h2>
-  <ul />
+  <ul
+    className="MemberListMain__list"
+  />
   <div
     className="Main__button-container"
   >
@@ -29,7 +26,7 @@ exports[`PostListMain component renders a .PostListMain by default 1`] = `
           "render": [Function],
         }
       }
-      to="/add-post"
+      to="/add-member"
       type="button"
     >
       <FontAwesomeIcon
@@ -57,8 +54,8 @@ exports[`PostListMain component renders a .PostListMain by default 1`] = `
         transform={null}
       />
       <br />
-      Post
+      Member
     </NavConnectivityButton>
   </div>
-</section>
+</div>
 `;

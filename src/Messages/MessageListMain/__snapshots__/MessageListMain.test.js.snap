@@ -1,15 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MessageListMain component renders a .MessageListMain by default 1`] = `
-<main
+<section
   className="PostListMain"
 >
+  <h2
+    className="PageTitle"
+  >
+    Private Messages
+  </h2>
   <ul />
   <div
-    className="MessageListMain__button-container"
+    className="Main__button-container"
   >
-    <NavCircleButton
-      className="MessageListMain__add-message-button"
+    <NavConnectivityButton
+      className="Main__add-button"
       tag={
         Object {
           "$$typeof": Symbol(react.forward_ref),
@@ -53,7 +58,7 @@ exports[`MessageListMain component renders a .MessageListMain by default 1`] = `
       />
       <br />
       Message
-    </NavCircleButton>
+    </NavConnectivityButton>
   </div>
-</main>
+</section>
 `;

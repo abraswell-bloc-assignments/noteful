@@ -2,10 +2,10 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import ApiContext from '../../ApiContext'
-import CircleButton from '../../CircleButton/CircleButton'
+import ConnectivityButton from '../../ConnectivityButton/ConnectivityButton'
 import Post from '../Post/Post'
-import { getPostsForMember } from '../../posts-helpers'
-import './PostListMain.css'
+import { getPostsForMember } from '../posts-helpers'
+
 
 export default class PostListMain extends React.Component {
   static defaultProps = {
@@ -21,32 +21,35 @@ export default class PostListMain extends React.Component {
     const { posts=[] } = this.context
     const postsForMember = getPostsForMember(posts, memberid)
     return (
-      <main className='PostListMain'>
+      <section className='PostListMain'>
+        <h2 className='PageTitle'>Public Posts</h2>
         <ul>
           {postsForMember.map(post =>
             <li key={post.id}>
               <Post
                 id={post.id}
                 content={post.content}
-                name={post.name}
+                nickname={post.nickname}
                 modified={post.modified}
               />
             </li>
           )}
         </ul>
-        <div className='PostListMain__button-container'>
-          <CircleButton 
+        <div className='Main__button-container'>
+          <ConnectivityButton 
             tag={Link}
             to='/add-post'
             type='button'
-            className='PostListMain__add-post-button'
+            className='Main__add-button'
           >
             <FontAwesomeIcon icon={['fa', 'plus']} />
+            <br />            
+            New
             <br />
             Post
-          </CircleButton>
+          </ConnectivityButton>
         </div>
-      </main>
+      </section>
     )
   }
 }

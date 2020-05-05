@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectivityButton component renders a button.ConnectivityButton by default 1`] = `
+<a
+  className="NavButton "
+/>
+`;
+
+exports[`ConnectivityButton component renders the circle button from props 1`] = `
+<a
+  className="NavButton test-class-name"
+  data-other="test-other-prop"
+>
+  <p>
+    test children
+  </p>
+</a>
+`;

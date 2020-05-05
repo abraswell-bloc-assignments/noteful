@@ -9,31 +9,151 @@
     min-height: 100vh;
   }
 
-.App__nav {
-    background-color: #0b1b32;
+.App__header {
+  background-color: #555;
+  color: #111;
+  grid-area: header;
+  height: 15vh;
+  width: 143.5%;
+  padding-left: 16px;
+  padding-top: 32px;
+  position: relative;
+  right: 43.5%;
+  z-index: 1000;
+}
+
+.App__header a {
     color: #fff;
+    text-decoration: none;
+  }
+
+.App__main {
+    background-color: #fff;
+    grid-area: main;
+    height: calc(95vh - 120px);
+    margin-top: 5vh;
+    overflow: auto;
+  }
+
+h1 {
+  margin: 3vh 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+/************* Buttons ***************/
+
+.App__nav {
     grid-area: sidebar;
     height: 100vh;
     overflow: auto;
   }
 
-.App__header {
-    background-color: #0b1f3a;
-    color: #bdbdbd;
+.buttons button {
+  background-color: #cacaca;
+  border-radius: 30px;
+  border: 0;
+  color: black;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  height: 60px;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  width: 60px;
+  margin: 1vh auto
+}
+
+a.buttons button {
+  padding: 16px 8px 8px;
+}
+
+.buttons button:hover {
+  background-color: #29862e;
+  cursor: pointer;
+}
+
+.buttons button:focus {
+  background-color: #29862e;
+}
+
+.Item__delete  {
+  background-color: #fff;
+  border: 0;
+  color: #111;
+  float: right;
+  margin: 0 3px;
+  font-size: 12px;
+  position: relative;
+}
+
+.ItemPageMain__content>.Item__delete {
+  bottom: 2vh;
+}
+
+.Item__delete:hover {
+  background-color: #bd0909;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+  /******** End of Buttons *********/
+  .PageTitle {
+    font-size: 2em;
+    text-align: center;
+    width: 60%;
+    margin: 1vh 30.5% 8px 9.5%;
+  }
+
+  .Item__in__list {
+    background-color: #ccc;
+    color: #111;
+    border: 1px solid #000;
+    margin: 0 32% 8px 8%;
+    width: 60%;
+    padding: 8px 0 8px 8px;
+  }
+
+  .ItemPageMain {
+    background-color: #efefef;
+    border: 1px solid #111; 
+    padding: 10px;
+    margin: 0 33% 8px 10.5%;
+    width: 57.5%;
+    position: relative;
+    top: 8vh;
+  }
+  
+  .Item__title {
     font-family: var(--custom-font);
-    grid-area: header;
-    padding-left: 16px;
-    padding-top: 32px;
-    text-shadow: 2px 1px 2px black;
+    font-size: 20px;
+    margin: 0;
   }
 
-.App__header a {
-    color: #bdbdbd;
+  .Item__title a {
+    color: #111;
+    display: block;
+    text-decoration: none;
   }
 
-.App__main {
-    background-color: #102541;
-    grid-area: main;
-    height: calc(100vh - 120px);
-    overflow: auto;
+  .Item__title a:hover {
+    color: blue;
   }
+
+  .Item__content {
+    color: #111;
+    font-size: 14px;
+  }
+  
+  .Item__dates {
+    color: #111;
+    font-size: 14px;
+  }
+
+
+  

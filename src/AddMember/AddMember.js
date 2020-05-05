@@ -58,7 +58,7 @@ export default class AddMember extends Component {
   handleAddMember = () => {
 
     const options = {
-      method: 'POST',
+      method: 'MEMBER',
       headers: {
         'Content-Type': 'application/json'
       },

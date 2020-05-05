@@ -4,28 +4,26 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble,faPencilAlt,} 
   from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import ConnectivityError from '../ConnectivityError/ConnectivityError'
+import Nav from '../ConnectivityNav/ConnectivityNav'
 
 import AddMessage from '../AddMessage/AddMessage'
 import AddPost from '../AddPost/AddPost'
 
 import AddMember from '../AddMember/AddMember'
 
-import { findMessage, findMessageMember } from '../messages-helpers'
-import { findPost, findPostMember } from '../posts-helpers'
+import MemberListMain from '../Members/MemberListMain/MemberListMain'
+import MemberPageMain from '../Members/MemberPageMain/MemberPageMain'
+
 
 import MessageListMain from '../Messages/MessageListMain/MessageListMain'
-//import MessageListNav from '../MessageListNav/MessageListNav'
 import MessagePageMain from '../Messages/MessagePageMain/MessagePageMain'
-//import MessagePageNav from '../MessagePageNav/MessagePageNav/MessagePageNav'
 
 import PostListMain from '../Posts/PostListMain/PostListMain'
-import PostListNav from '../Posts/PostListNav/PostListNav'
 import PostPageMain from '../Posts/PostPageMain/PostPageMain'
-import PostPageNav from '../Posts/PostPageNav/PostPageNav'
+
 import './App.css'
 
 
@@ -33,10 +31,11 @@ library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAl
 
 class App extends Component {
   state = {
-    editMessageId: null,
-    posts: [],
-    editPostId: null,
     members: [],
+    messages: [],
+    posts: [],
+    editMessageId: null,
+    editPostId: null,
     err: null
   }
 
@@ -140,54 +139,18 @@ class App extends Component {
     })
   }
 
-  renderNavRoutes() {
-    const { messages, posts, members } = this.state
-    return (
-      <>
-        {/* Main Route */}
-        {['/', '/members/:memberid', '/messages'].map(path => (
-          <Route exact key={path} path={path} component={PostListNav} />
-        ))}
-        <Route
-          path='/posts/:postId'
-          render={routeProps => {
-            const { postId } = routeProps.match.params
-            const post = findPost(posts, postId) || {}
-            const member = findPostMember(members, post.memberid)
-            return <PostPageNav {...routeProps} member={member} />
-          }}
-        />
-        <Route
-          path='/messages/:messageId'
-          render={routeProps => {
-            const { messageId } = routeProps.match.params
-            const message = findMessage(messages, messageId) || {}
-            const member = findMessageMember(members, message.memberid)
-            return <PostPageNav {...routeProps} member={member} />
-          }}
-        />
-        {/* Other Routes -- Back Button */}
-        <Route path='/add-member' component={PostPageNav} />
-        <Route path='/add-post' component={PostPageNav} />
-        <Route path='/add-message' component={PostPageNav} />
-      </>
-    )
-  }
-
   renderMainRoutes() {
     return (
       <>
         {/* Main Route */}
-        {['/', '/members/:memberid'].map(path => (
           <Route
             exact
-            key={path}
-            path={path}
+            path={'/'}
             render={routeProps => {
               return <PostListMain {...routeProps} />
             }}
           />
-        ))}
+
         {/* Post Route */}
         <Route
           path='/posts/:postId'
@@ -195,6 +158,22 @@ class App extends Component {
             return <PostPageMain {...routeProps} />
           }}
         />
+
+        {/* Member Route */}
+        <Route
+          exact
+          path='/members'
+          render={routeProps => {
+            return <MemberListMain {...routeProps} />
+          }}
+        />
+        <Route
+          path='/members/:memberId'
+          render={routeProps => {
+            return <MemberPageMain {...routeProps} />
+          }}
+        />
+        
         {/* Message Route */}
         <Route
           exact
@@ -209,12 +188,14 @@ class App extends Component {
             return <MessagePageMain {...routeProps} />
           }}
         />
+
         {/* Add-Member Route */}
         <Route path='/add-member' component={AddMember} />
         {/* Add-Message Route */}
         <Route path='/add-message' component={AddMessage} />
         {/* Add-Post Route */}
         <Route path='/add-post' component={AddPost} />
+        
       </>
     )
   }
@@ -234,12 +215,11 @@ class App extends Component {
       >
         <div className='App'>
           <ConnectivityError>
-            <nav className='App__nav'>{this.renderNavRoutes()}</nav>
+            <Nav />
           </ConnectivityError>
           <header className='App__header'>
             <h1>
               <Link to='/'>Connectivity</Link>{' '}
-              <FontAwesomeIcon icon={['fa', 'check-double']} />
             </h1>
           </header>
           <ConnectivityError>

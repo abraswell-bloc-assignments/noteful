@@ -2,10 +2,10 @@
 
 exports[`MessagePageMain component renders a .MessagePageMain by default 1`] = `
 <section
-  className="MessagePageMain"
+  className="ItemPageMain"
 >
-  <NavCircleButton
-    className="PostPageNav__back-button"
+  <NavConnectivityButton
+    className="Nav__back-button"
     onClick={[Function]}
     role="link"
     tag="button"
@@ -36,16 +36,62 @@ exports[`MessagePageMain component renders a .MessagePageMain by default 1`] = `
     />
     <br />
     Back
-  </NavCircleButton>
-  <Message
-    onDeleteMessage={[Function]}
-  />
+  </NavConnectivityButton>
   <div
-    className="MessagePageMain__content"
+    className="ItemPageMain__content"
   >
-    <p
-      key="0"
-    />
+    <p>
+      Member:
+       
+    </p>
+    <div
+      className="ItemPageMain__content"
+    >
+      <p
+        key="0"
+      >
+        Content: 
+      </p>
+    </div>
+    <p>
+      Sent:
+       
+    </p>
+    <p>
+      Read:
+       
+    </p>
+    <button
+      className="Item__delete"
+      type="button"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Array [
+            "fa",
+            "trash-alt",
+          ]
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+       
+      remove
+    </button>
   </div>
 </section>
 `;

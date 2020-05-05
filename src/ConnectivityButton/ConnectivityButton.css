@@ -1,0 +1,71 @@
+
+.Main__button-container {
+  max-width: 380px;
+  width: 4%;
+  margin: 0 10px;
+  position: fixed;
+  top: 25vh;
+  right: 10%;
+}
+
+.Main__add-button {
+  margin: 0 auto 20px;
+}
+.Main__add-button:hover {
+  background-color: #29862e;
+  color: white;
+}
+
+.Main__add-button:focus {
+  background-color: #29862e;
+  color: white;
+}
+
+.NavButton {
+  background-color: #bbb;
+  border: 0;
+  outline: 0;
+  color: black;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  height: 80px;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  width: 120px;
+}
+
+a.NavButton {
+  padding: 18px 8px 8px;
+  line-height:1.3em;
+}
+
+.NavButton:hover {
+  cursor: pointer;
+}
+
+.Nav__back-button {
+  max-width: 380px;
+  margin: 0 10px;
+  position: fixed;
+  top: 25vh;
+  right: 8.25%;
+}
+
+#root > div > main > section > button {
+  background-color: #dddddd;
+  padding: 5px 15px;
+}
+
+#root > div > main > section > button:hover {
+  background-color: #29862e;
+  color: white;
+  }
+
+#root > div > main > section > button > a{
+  text-decoration: none;
+  color:#0b1f3a;
+} 
+
+  
