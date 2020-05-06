@@ -27,10 +27,6 @@ export default class MemberPageMain extends React.Component {
 
 
   render(){
-    // const { /*email, about,*/ nickname, id, city, state} = this.props
-    // if (/*!email || !about ||*/ !nickname || !id || !city || !state) {
-    //   return null
-    // } 
     const { members=[], posts = [], messages = [] } = this.context
     const { memberId } = this.props.match.params
     const member = findMember(members, memberId) || { content: '' }
@@ -54,30 +50,37 @@ export default class MemberPageMain extends React.Component {
             </div>
 
             <div className='ItemPageMain__content'>
-              <h3 className='Member__nickname'>
-                {member.nickname} {' '} ({member.full_name}) 
-              </h3>
-              <p className='Member__location'>
-                Lives In:{' '}{member.city}, {member.state}
-              </p>
-              <p className='Member__email'>
-                Email:{' '}{member.email}
-              </p>
-              <p className='Member__about'>
-                About:{' '}{member.about}
-              </p> 
-              <p className='Member__num-posts'>
-                Number of Posts By Member:{' '}{countPostsForMember(posts, member.id)}
-              </p>
-              <p className='Member__num-messages'>
-                Number of Messages From Member:{' '}{countMessagesForMember(messages, member.id)}
-              </p>
+              <div className='member__page__main__flexbox-container'>
+                <div className='member__page__img'>
+                  <img 
+                      src={require(`../../Images/User_${memberId}.jpg`)} 
+                      alt='member headshot'
+                  >
+                  </img>    
+                </div>  
+
+
+                <div className='member__page__info'>
+                  <h3 className='Member__nickname'>
+                    {member.nickname} {' '} ({member.full_name}) 
+                  </h3>
+                  <p className='Member__location'>
+                    Lives In:{' '}{member.city}, {member.state}
+                  </p>
+                  <p className='Member__email'>
+                    Email:{' '}{member.email}
+                  </p>
+                  <p className='Member__about'>
+                    About:{' '}{member.about}
+                  </p> 
+                </div>
+              </div>
             </div>
           </div>
 
           <div className='Member__activity'>
               <div className='Member__activity__section'>
-                <h3 className='SectionTitle'>Public Posts From This Member</h3>
+                <h3 className='SectionTitle'>Public Posts From This Member:{' '}{countPostsForMember(posts, member.id)} </h3>
                   <ul>
                     {postsFromMember.map(post =>
                       <li key={post.id}>
@@ -93,7 +96,7 @@ export default class MemberPageMain extends React.Component {
               </div>
 
               <div className='Member__activity__section'>
-                <h3 className='SectionTitle'>Private Messages From This Member</h3>
+                <h3 className='SectionTitle'>Private Messages From This Member:{' '}{countMessagesForMember(messages, member.id)}</h3>
                   <ul>
                     {messagesFromMember.map(message =>
                       <li key={message.id}>

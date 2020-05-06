@@ -12,3 +12,10 @@ export const getPostsFromMember = (posts=[], memberid) => (
 
 export const countPostsForMember = (posts=[], memberid) =>
   posts.filter(post => post.memberid === memberid).length
+
+export const getCommentsForPost = (comments=[], post_id) => (
+  (!post_id)
+    ? comments
+    : comments.filter(comment => comment.post_id === post_id)
+)
+

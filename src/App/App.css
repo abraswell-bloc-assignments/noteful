@@ -130,7 +130,7 @@ a.buttons button {
 
   .ItemPageMain__content {
     padding: 10px;
-    border: 1px solid #111;
+    /* border: 1px solid #111; */
   }
 
   .SectionTitle {
@@ -168,7 +168,7 @@ a.buttons button {
     font-size: 14px;
   }
 
-  /**************** Member Page ***************/
+  /**************** Member List Page ***************/
 
   .MemberListMain__flex {
     display: flex;
@@ -221,6 +221,35 @@ a.buttons button {
     position: relative;
     text-align: center;
   }
+
+  /****************** Member Page Main *********************/
+
+  .member__page__main__flexbox-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .member__page__img {
+    width: 40%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .member__page__img > img {
+    width: 100%;
+    padding-top: .7vh;
+  }
+
+  .member__page__info {
+    width: 55%;
+    text-align: left;
+    padding-left: 10%;
+  }
+
+
 
   
 

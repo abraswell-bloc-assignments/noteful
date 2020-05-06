@@ -1,8 +1,10 @@
 import React from 'react'
 import ApiContext from '../../ApiContext'
 import { findPost } from '../posts-helpers'
+import { getCommentsForPost } from '../posts-helpers'
 import ConnectivityButton from '../../ConnectivityButton/ConnectivityButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Comment from '../../Comments/Comments'
 
 
 export default class PostPageMain extends React.Component {
@@ -23,8 +25,9 @@ export default class PostPageMain extends React.Component {
   }
 
   render(){
-    const { posts=[] } = this.context
+    const { posts=[], comments=[] } = this.context
     const { postId } = this.props.match.params
+    const commentsForPost = getCommentsForPost(comments, postId)
     const post = findPost(posts, postId) || { content: '' }
     return(
       <section className='ItemPageMain'>
@@ -47,6 +50,23 @@ export default class PostPageMain extends React.Component {
             {' '}
             remove
           </button>
+        </div>
+
+        <div className='Member__activity'>
+          <div className='Member__activity__section'>
+              <ul>
+                {commentsForPost.map(comment =>
+                  <li key={comment.id}>
+                    <Comment
+                      // id={comment.id}
+                      // text={comment.text}
+                      nickname={comment.nickname}
+                      // created_at={comment.created_at}
+                    />
+                  </li>
+                )}
+              </ul>
+          </div>
         </div>
 
         <div className='Main__button-container'>

@@ -1,27 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { format } from 'date-fns'
-import ApiContext from '../../ApiContext'
-import config from '../../config'
-// import './Member.css'
+import ApiContext from '../ApiContext'
+import config from '../config'
 
-export default class Member extends React.Component {
+
+export default class Comment extends React.Component {
 
   static defaultProps ={
-    onDeleteMember: () => {},
+    onDeleteComment: () => {},
   }
   static contextType = ApiContext
 
 
   handleClickDelete = () => {
-    const memberId = this.props.id
+    const commentId = this.props.id
     const options = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
     }}
-    const url = (`${config.API_ENDPOINT}/members/${memberId}`)
+    const url = (`${config.API_ENDPOINT}/comments/${commentId}`)
       fetch(url, options)
       .then(res => {
         if (!res.ok) {
@@ -30,9 +30,9 @@ export default class Member extends React.Component {
         return res.json
       })
       .then(() => {
-        this.context.handleDeleteMember(memberId)
+        this.context.handleDeleteComment(commentId)
         // allow parent to perform extra behaviour
-        this.props.onDeleteMember(memberId)
+        this.props.onDeleteComment(commentId)
       })
       .catch(error => {
         console.error({ error })
@@ -41,20 +41,21 @@ export default class Member extends React.Component {
 
   
   render() {
-    const { name, id, modified} = this.props
-    if (!name || !id || !modified) {
+    const { text, nickname, id, created_at} = this.props
+    if (!text || !nickname || !id || !created_at) {
       return null
     } 
-    const formatDate = format(new Date(modified), 'MMMM do yyyy')
+    const formatDate = format(new Date(created_at), 'hh:mm a MMMM do, yyyy')
     return (
-      <div className='Member'>
-        <h2 className='Member__title'>
-          <Link to={`/members/${id}`}>
-            {name}
-          </Link>
-        </h2>
+      <div className='Item__in__list'>
+        <h3 className='Item__title'>
+            {nickname}
+        </h3>
+        <p className='Item__content'>
+          {text}
+        </p>
         <button
-          className='Member__delete'
+          className='Item__delete'
           type='button'
           onClick={this.handleClickDelete}
         >
@@ -62,10 +63,8 @@ export default class Member extends React.Component {
           {' '}
           remove
         </button>
-        <div className='Member__dates'>
-          <div className='Member__dates-modified'>
-            Modified
-            {' '}
+        <div className='Item__dates'>
+          <div className='Item__dates-modified'>
             <span className='Date'>
             {formatDate}
             </span>
@@ -75,8 +74,3 @@ export default class Member extends React.Component {
     )   
   }
 }
-
-
-
-
-

@@ -31,6 +31,7 @@ library.add(faPlus, faEdit, faChevronLeft, faTrashAlt, faCheckDouble, faPencilAl
 
 class App extends Component {
   state = {
+    comments: [],
     members: [],
     messages: [],
     posts: [],
@@ -39,6 +40,7 @@ class App extends Component {
     err: null
   }
 
+  CommentUrl = `${config.API_ENDPOINT}/comments`
   MemberUrl = `${config.API_ENDPOINT}/members`
   PostUrl = `${config.API_ENDPOINT}/posts`
   MessageUrl = `${config.API_ENDPOINT}/messages`
@@ -85,6 +87,27 @@ class App extends Component {
         })
       })
 
+      fetch(this.CommentUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Something went wrong, please try again later.')
+        }
+        return res
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          comments: data,
+          error: null
+        })
+      })
+      .catch(err => {
+        this.setState({
+          error: err.message
+        })
+        console.log(err)
+      })
+
       fetch(this.MessageUrl)
       .then(res => {
         if (!res.ok) {
@@ -113,6 +136,18 @@ class App extends Component {
       },
       () => this.props.history.replace('/')
     )
+  }
+
+  handleAddComment = comment => {
+    this.setState({ comments: [...this.state.comments, comment] }, () =>
+      this.props.history.replace('/')
+    )
+  }
+
+  handleDeleteComment = commentId => {
+    this.setState({
+        comments: this.state.comments.filter(comment => comment.id !== commentId)
+    })
   }
 
   handleAddMessage = message => {
@@ -207,6 +242,8 @@ class App extends Component {
           messages: this.state.messages,
           posts: this.state.posts,
           handleAddMember: this.handleAddMember,
+          handleAddComment: this.handleAddComment,
+          handleDeleteComment: this.handleDeleteComment,
           handleAddMessage: this.handleAddMessage,
           handleDeleteMessage: this.handleDeleteMessage,
           handleAddPost: this.handleAddPost,
