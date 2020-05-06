@@ -1,16 +1,16 @@
 import React from 'react'
 import ApiContext from '../../ApiContext'
-//import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { findMember } from '../members-helpers'
 import { countPostsForMember } from '../../Posts/posts-helpers'
-import { getPostsFromMember } from '../../Posts/posts-helpers'
 import { countMessagesForMember } from '../../Messages/messages-helpers'
 import { getMessagesFromMember } from '../../Messages/messages-helpers'
 import ConnectivityButton from '../../ConnectivityButton/ConnectivityButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Message from '../../Messages/Message/Message'
-import Post from '../../Posts/Post/Post'
 import './MemberPageMain.css'
+
+
 
 export default class MemberPageMain extends React.Component {
   static defaultProps = {
@@ -30,7 +30,6 @@ export default class MemberPageMain extends React.Component {
     const { members=[], posts = [], messages = [] } = this.context
     const { memberId } = this.props.match.params
     const member = findMember(members, memberId) || { content: '' }
-    const postsFromMember = getPostsFromMember(posts, memberId)
     const messagesFromMember = getMessagesFromMember(messages, memberId)
     
     return(
@@ -51,13 +50,13 @@ export default class MemberPageMain extends React.Component {
 
             <div className='ItemPageMain__content'>
               <div className='member__page__main__flexbox-container'>
-                <div className='member__page__img'>
+                {/* <div className='member__page__img'>
                   <img 
                       src={require(`../../Images/User_${memberId}.jpg`)} 
                       alt='member headshot'
                   >
                   </img>    
-                </div>  
+                </div>   */}
 
 
                 <div className='member__page__info'>
@@ -80,19 +79,9 @@ export default class MemberPageMain extends React.Component {
 
           <div className='Member__activity'>
               <div className='Member__activity__section'>
+              <Link to={`/member-post-list`}>                                 
                 <h3 className='SectionTitle'>Public Posts From This Member:{' '}{countPostsForMember(posts, member.id)} </h3>
-                  <ul>
-                    {postsFromMember.map(post =>
-                      <li key={post.id}>
-                        <Post
-                          id={post.id}
-                          content={post.content}
-                          nickname={post.nickname}
-                          modified={post.modified}
-                        />
-                      </li>
-                    )}
-                  </ul>
+              </Link>    
               </div>
 
               <div className='Member__activity__section'>

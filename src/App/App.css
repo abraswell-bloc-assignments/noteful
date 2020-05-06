@@ -92,7 +92,9 @@ a.buttons button {
 }
 
 .ItemPageMain__content>.Item__delete {
-  bottom: 2vh;
+  padding: 5px 10px;
+  border: 1px solid #111;
+  right: 87.5%;
 }
 
 .Item__delete:hover {
@@ -102,162 +104,161 @@ a.buttons button {
   font-weight: bold;
 }
 
-  /******** End of Buttons *********/
-  .PageTitle {
-    font-size: 2em;
-    text-align: center;
-    width: 60%;
-    margin: 1vh 30.5% 8px 9.5%;
-  }
+/******** End of Buttons *********/
+.PageTitle {
+  font-size: 2em;
+  text-align: center;
+  width: 60%;
+  margin: 1vh 30.5% 8px 9.5%;
+}
 
-  .Item__in__list {
-    background-color: #ccc;
-    color: #111;
-    border: 1px solid #000;
-    margin: 0 32% 8px 8%;
-    width: 60%;
-    padding: 8px 0 8px 8px;
-  }
+.Item__in__list {
+  background-color: #ccc;
+  color: #111;
+  border: 1px solid #000;
+  margin: 0 32% 8px 8%;
+  width: 60%;
+  padding: 8px 0 8px 8px;
+}
 
-  .ItemPageMain {
-    background-color: #efefef; 
-    padding: 10px;
-    margin: 0 33% 10vh 10.5%;
-    width: 57.5%;
-    position: relative;
-    top: 8vh;
-  }
+.ItemPageMain {
+  background-color: #efefef; 
+  padding: 10px;
+  margin: 0 33% 10vh 10.5%;
+  width: 57.5%;
+  position: relative;
+  top: 8vh;
+}
 
-  .ItemPageMain__content {
-    padding: 10px;
-    /* border: 1px solid #111; */
-  }
+.ItemPageMain__content {
+  padding: 10px 0;
+  /* border: 1px solid #111; */
+}
 
-  .SectionTitle {
-    font-size: 1.5em;
-    font-weight: 400;
-    text-align: center;
-    width: 60%;
-    margin: 4vh 30.5% 8px 9.5%;
+.SectionTitle {
+  font-size: 1.5em;
+  font-weight: 400;
+  text-align: center;
+  width: 60%;
+  margin: 4vh 30.5% 8px 9.5%;
 
-  }
-  
-  .Item__title {
-    font-family: var(--custom-font);
-    font-size: 20px;
-    margin: 0;
-  }
+}
 
-  .Item__title a {
-    color: #111;
-    display: block;
-    text-decoration: none;
-  }
+.Item__title {
+  font-family: var(--custom-font);
+  font-size: 20px;
+  margin: 0;
+}
 
-  .Item__title a:hover {
-    color: blue;
-  }
+.Item__title a {
+  color: #111;
+  display: block;
+  text-decoration: none;
+}
 
-  .Item__content {
-    color: #111;
-    font-size: 14px;
-  }
-  
-  .Item__dates {
-    color: #111;
-    font-size: 14px;
-  }
+.Item__title a:hover {
+  color: blue;
+}
 
-  /**************** Member List Page ***************/
+.Item__content {
+  color: #111;
+  font-size: 14px;
+}
 
-  .MemberListMain__flex {
-    display: flex;
-  }
+.Item__dates {
+  color: #111;
+  font-size: 14px;
+}
 
-  .Member__activity {
-    width: 80%;
-    margin: 0 13% 0 7%;
-  }
+/**************** Member List Page ***************/
 
-  .Member__num-posts {
-    color: #111;
-    font-size: 16px;
-  }
+.MemberListMain__flex {
+  display: flex;
+}
 
-  .Member__num-messages {
-    color: #111;
-    font-size: 16px;
-  }
+.Member__activity {
+  width: 80%;
+  margin: 0 13% 0 7%;
+}
 
-  .member-page-flexbox-container {
-    width: 70%;
-    margin: 0 24% 0 6%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+.Member__num-posts {
+  color: #111;
+  font-size: 16px;
+}
 
-  .member-flexbox-container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    width: 45%;
-    margin-top: 5vh;
-  }
+.Member__num-messages {
+  color: #111;
+  font-size: 16px;
+}
 
-  .member-flexbox-container:last-child {
-    margin-right: 50%;
-  }
+.member-page-flexbox-container {
+  width: 70%;
+  margin: 0 24% 0 6%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-  .member__img {
-    width: 80%;
-    text-align: center;
-  }
+.member-flexbox-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+  margin-top: 5vh;
+}
 
-  .member__info {
-    width: 80%;
-    position: relative;
-    text-align: center;
-  }
+.member-flexbox-container:last-child {
+  margin-right: 50%;
+}
 
-  /****************** Member Page Main *********************/
+.member__img {
+  width: 80%;
+  text-align: center;
+}
 
-  .member__page__main__flexbox-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+.member__info {
+  width: 80%;
+  position: relative;
+  text-align: center;
+}
 
-  .member__page__img {
-    width: 40%;
-    text-align: center;
-    align-items: center;
-  }
+/****************** Member Page Main *********************/
 
-  .member__page__img > img {
-    width: 100%;
-    padding-top: .7vh;
-  }
+.member__page__main__flexbox-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
-  .member__page__info {
-    width: 55%;
-    text-align: left;
-    padding-left: 10%;
-  }
+.member__page__img {
+  width: 40%;
+  text-align: center;
+  align-items: center;
+}
 
+.member__page__img > img {
+  width: 100%;
+  padding-top: .7vh;
+}
 
-
-  
+.member__page__info {
+  width: 55%;
+  text-align: left;
+  padding-left: 10%;
+}
 
 
 
 
 
-  
 
 
-  
+
+
+
+
+

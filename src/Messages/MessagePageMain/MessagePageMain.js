@@ -41,22 +41,25 @@ export default class MessagePageMain extends React.Component {
 
         <div className='ItemPageMain__content'>
           <p>Member:{' '}{message.nickname}</p>
-          <div className='ItemPageMain__content'>
-          {message.content.split(/\n \r|\n/).map((para, i) =>
-            <p key={i}>Content: {para}</p>
-          )}
-          </div>
           <p>Sent:{' '}{message.modified}</p>
-          <p>Read:{' '}{message.read}</p>
+          <p>Read:{' '}{message.read}</p> 
           <button
             className='Item__delete'
             type='button'
             onClick={this.handleClickDelete}
           >
-          <FontAwesomeIcon icon={['fa', 'trash-alt']} />
-          {' '}
-          remove
-        </button>
+            <FontAwesomeIcon icon={['fa', 'trash-alt']} />
+            {' '}
+            remove
+          </button>
+          <br></br>
+          <br></br>
+          <div className='ItemPageMain__content'>
+          {message.content.split(/\n \r|\n/).map((para, i) =>
+            <p key={i}>Content:{para}</p>
+          )}
+          </div>
+
         </div>
 
 

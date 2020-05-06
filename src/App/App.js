@@ -16,6 +16,7 @@ import AddMember from '../AddMember/AddMember'
 
 import MemberListMain from '../Members/MemberListMain/MemberListMain'
 import MemberPageMain from '../Members/MemberPageMain/MemberPageMain'
+import MemberPostList from '../Members/MemberPostList/MemberPostList'
 
 
 import MessageListMain from '../Messages/MessageListMain/MessageListMain'
@@ -230,6 +231,8 @@ class App extends Component {
         <Route path='/add-message' component={AddMessage} />
         {/* Add-Post Route */}
         <Route path='/add-post' component={AddPost} />
+        {/* Member-Post-List Route */}
+        <Route path='/members/member-post-list' component={MemberPostList} />
         
       </>
     )
